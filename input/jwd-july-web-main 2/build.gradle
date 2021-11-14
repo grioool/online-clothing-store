@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.epam.jwd.web'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+    implementation 'javax.servlet.jsp.jstl:jstl-api:1.2'
+    runtimeOnly 'org.glassfish.web:jstl-impl:1.2'
+
+    implementation 'at.favre.lib:bcrypt:0.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+war {
+    archiveName = 'ROOT.war'
+}
