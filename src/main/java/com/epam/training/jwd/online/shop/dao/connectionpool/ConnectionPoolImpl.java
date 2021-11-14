@@ -48,7 +48,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
                 return true;
             }
         } catch (ConnectionPoolException e) {
-            logger.error(e, "Can't initialize connections.");
+            logger.error("Can't initialize connections.");
         }
         return false;
     }
@@ -92,7 +92,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
             availableConnections.add((ProxyConnection) connection);
             this.notifyAll();
         } else {
-            logger.error(e, "Can't return connections. ");
+            logger.error("Can't return connections. ");
         }
     }
 
@@ -111,7 +111,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
         try {
             connection.realClose();
         } catch (SQLException throwables) {
-            logger.error(e, "Can't close connection. ");
+            logger.error("Can't close connection. ");
         }
     }
 }

@@ -4,6 +4,7 @@ import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.CommandRequest;
 import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
 import com.epam.training.jwd.online.shop.service.dto.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -55,7 +56,7 @@ public enum LoginCommand implements Command {
     }
 
     @Override
-    public CommandResponse execute(CommandRequest request) {
+    public CommandResponse execute(CommandRequest request) throws EntityNotFoundException {
         final String login = request.getParameter(LOGIN_PARAM_NAME);
         final String password = request.getParameter(PASSWORD_PARAM);
         final User user = new User(login, password);
@@ -70,7 +71,7 @@ public enum LoginCommand implements Command {
         return LOGIN_ERROR_RESPONSE;
     }
 
-    private CommandResponse addUserInfoToSession(CommandRequest request, String login) {
+    private CommandResponse addUserInfoToSession(CommandRequest request, String login) throws EntityNotFoundException {
         request.getCurrentSession().ifPresent(HttpSession::invalidate);
         final HttpSession session = request.createSession();
         final User loggedInUser = service.findByLogin(login);

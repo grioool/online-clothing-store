@@ -1,6 +1,8 @@
 package com.epam.training.jwd.online.shop.service.dto;
 
 import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
+
 import java.util.List;
 
 public interface UserService {
@@ -9,7 +11,7 @@ public interface UserService {
 
     boolean canLogIn(User user);
 
-    User findByLogin(String login);
+    User findByLogin(String login) throws EntityNotFoundException;
 
     List<User> findAll();
 

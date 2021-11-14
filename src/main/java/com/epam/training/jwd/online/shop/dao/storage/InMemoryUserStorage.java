@@ -1,9 +1,9 @@
 package com.epam.training.jwd.online.shop.dao.storage;
 
-import com.epam.jwd.service.exception.BusinessValidationException;
-import com.epam.jwd.service.exception.UniqueConstraintViolationException;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.entity.UserRole;
+import com.epam.training.jwd.online.shop.service.exception.BusinessValidationException;
+import com.epam.training.jwd.online.shop.service.exception.UniqueConstraintViolationException;
 
 import java.util.ArrayList;
 import java.util.List;

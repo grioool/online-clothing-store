@@ -1,8 +1,8 @@
 package com.epam.training.jwd.online.shop.service.dto;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.epam.jwd.service.exception.EntityNotFoundException;
 import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
 import com.epam.training.jwd.online.shop.dao.storage.UserStorage;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public enum SimpleUserService implements UserService {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByLogin(String login) throws EntityNotFoundException {
         return storage.findByName(login)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(NOT_FOUND_MSG, login)));
     }

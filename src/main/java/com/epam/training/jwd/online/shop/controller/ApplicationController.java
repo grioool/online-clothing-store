@@ -4,6 +4,7 @@ package com.epam.training.jwd.online.shop.controller;
 import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.CommandRequest;
 import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
+import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,15 +23,23 @@ public class ApplicationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        process(req, resp);
+        try {
+            process(req, resp);
+        } catch (EntityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
+        try {
+            process(req, resp);
+        } catch (EntityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, EntityNotFoundException {
         System.out.println(this.toString());
 
         final String commandName = req.getParameter(COMMAND_PARAM_NAME);
