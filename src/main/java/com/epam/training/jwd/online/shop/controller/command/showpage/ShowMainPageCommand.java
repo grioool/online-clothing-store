@@ -8,7 +8,7 @@ import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 public enum ShowMainPageCommand implements Command {
     INSTANCE;
 
-    private static final String MAIN_PAGE_PATH = "/WEB-INF/jsp/main.jsp";
+    private static final String MAIN_PAGE_PATH = "/WEB-INF/jsp/user/mainPage.jsp";
 
     private static final CommandResponse SHOW_MAIN_PAGE = new CommandResponse() {
         @Override

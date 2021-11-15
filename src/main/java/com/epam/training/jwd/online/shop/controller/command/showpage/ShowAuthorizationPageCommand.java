@@ -8,12 +8,12 @@ import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 public enum ShowAuthorizationPageCommand implements Command {
     INSTANCE;
 
-    private static final String LOGIN_PAGE_PATH = "/WEB-INF/jsp/login.jsp";
+    private static final String AUTHORIZATION_PAGE_PATH = "/WEB-INF/jsp/user/login.jsp";
 
     private static final CommandResponse LOGIN_PAGE_RESPONSE = new CommandResponse() {
         @Override
         public String getPath() {
-            return "/WEB-INF/jsp/login.jsp";
+            return AUTHORIZATION_PAGE_PATH;
         }
 
         @Override

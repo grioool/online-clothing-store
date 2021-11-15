@@ -13,7 +13,7 @@ public enum ShowUsersPageCommand implements Command {
 
     private static final String USERS_ATTRIBUTE_NAME = "users";
     private static final String LANGUAGE_PARAM = "language";
-    private static final String USERS_PAGE_PATH = "/WEB-INF/jsp/users.jsp";
+    private static final String USERS_PAGE_PATH = "/WEB-INF/jsp/user/usersPage.jsp";
 
     private static final CommandResponse SHOW_USERS_PAGE_RESPONSE = new CommandResponse() {
         @Override

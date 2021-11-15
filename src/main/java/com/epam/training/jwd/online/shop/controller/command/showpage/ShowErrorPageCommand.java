@@ -8,7 +8,7 @@ import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 public enum ShowErrorPageCommand implements Command {
     INSTANCE;
 
-    private static final String ERROR_PAGE_PATH = "/WEB-INF/jsp/error.jsp";
+    private static final String ERROR_PAGE_PATH = "/WEB-INF/jsp/user/error.jsp";
 
     private static final CommandResponse ERROR_PAGE_RESPONSE = new CommandResponse() {
         @Override
