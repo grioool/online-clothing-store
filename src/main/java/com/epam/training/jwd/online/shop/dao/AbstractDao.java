@@ -49,6 +49,7 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
                 entity.setId(resultSet.getInt(1));
             }
         } catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
             throw new DaoException("Failed to create entity", e);
         }
     }
@@ -107,6 +108,7 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
                 }
             }
         } catch (SQLException | InterruptedException e) {
+            e.printStackTrace();
             throw new DaoException("Failed to find by " + fieldName.toString().toLowerCase());
         }
         return list;

@@ -7,6 +7,7 @@ import com.epam.training.jwd.online.shop.dao.entity.*;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 import com.epam.training.jwd.online.shop.dao.field.ProductField;
+import com.epam.training.jwd.online.shop.dao.field.UserField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,12 +23,12 @@ public class ProductDao extends AbstractDao<Product> {
     private final Logger logger = LogManager.getLogger(ProductDao.class);
 
     private static final String SQL_FIND_ALL = "SELECT product.id, product_name, price, name_of_image, product_description," +
-            " article, brand.brand_id, product_category.category_id FROM product" +
+            " article, brand_id, category_id FROM product" +
             " INNER JOIN brand ON brand.id = product.brand_id" +
-            " INNER JOIN product_category ON category.id = product.category_id";
+            " INNER JOIN product_category ON product_category.id = product.category_id";
 
-    private static final String SQL_SAVE_PRODUCT = "INSERT INTO \"product\"(product_name, price, brand_id, category_id" +
-            " name_of_img, product_description, article)" +
+    private static final String SQL_SAVE_PRODUCT = "INSERT INTO product (product_name, price, brand_id, category_id, " +
+            " name_of_image, product_description, article)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE_PRODUCT = "UPDATE product SET product_name = ?, price = ?, brand_id = ?, category_id = ?," +
@@ -66,9 +67,6 @@ public class ProductDao extends AbstractDao<Product> {
     }
 
 
-    public void save(Product product) throws DaoException {
-    }
-
     @Override
     protected void prepareSaveStatement(PreparedStatement preparedStatement, Product entity) throws SQLException {
         prepareAllStatement(preparedStatement, entity);
@@ -97,7 +95,7 @@ public class ProductDao extends AbstractDao<Product> {
                 .withId(resultSet.getInt(ProductField.ID.getField()))
                 .withProductName(resultSet.getString(ProductField.NAME.getField()))
                 .withPrice(resultSet.getDouble(ProductField.PRICE.getField()))
-               // .withBrand(retrieveBrandById(resultSet.getInt(ProductField.BRAND.getField())))
+                .withBrand(Brand.getById(resultSet.getInt(ProductField.BRAND.getField())))
                 .withProductCategory(findProductCategoryById(resultSet.getInt(ProductField.CATEGORY.getField())))
                 .withNameOfImage(resultSet.getString(ProductField.NAME_OF_IMAGE.getField()))
                 .withProductDescription(resultSet.getString(ProductField.DESCRIPTION.getField()))
@@ -106,7 +104,7 @@ public class ProductDao extends AbstractDao<Product> {
         return Optional.of(product);
     }
 
-    private ProductCategory findProductCategoryById(Integer id) throws DaoException {
+    protected ProductCategory findProductCategoryById(Integer id) throws DaoException {
         List<ProductCategory> productTypeList = ProductCategoryDao.INSTANCE.findByField(String.valueOf(id), ProductCategoryField.ID);
         if (productTypeList.size() < 1) {
             logger.warn("Failed to load product category.");
@@ -114,7 +112,6 @@ public class ProductDao extends AbstractDao<Product> {
         }
         return productTypeList.get(0);
     }
-
 
     protected Map<Product, Integer> findProductsInOrder(int id) throws DaoException {
         Map<Product, Integer> products = new HashMap<>();

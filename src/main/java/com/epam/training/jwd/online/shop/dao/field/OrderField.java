@@ -1,6 +1,8 @@
 package com.epam.training.jwd.online.shop.dao.field;
 
-public enum OrderField {
+import com.epam.training.jwd.online.shop.dao.entity.Order;
+
+public enum OrderField implements EntityField<Order> {
     ID("id"),
     PAYMENT_METHOD("payment_method"),
     STATUS("status_id"),

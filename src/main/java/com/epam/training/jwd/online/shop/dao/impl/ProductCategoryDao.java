@@ -21,7 +21,7 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory> {
 
     private static final String SQL_FIND_ALL = "SELECT product_category.id, category_name, filename_of_image";
 
-    private static final String SQL_SAVE_PRODUCT_CATEGORY = "INSERT INTO \"product_category\"(category_name, filename_of_image)" +
+    private static final String SQL_SAVE_PRODUCT_CATEGORY = "INSERT INTO product_category(category_name, filename_of_image)" +
             " VALUES (?, ?)";
 
     private static final String SQL_UPDATE_PRODUCT_CATEGORY = "UPDATE product_category SET category_name = ?, filename_of_image = ?, WHERE id = ?";
@@ -79,23 +79,5 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory> {
                 .withImgFileName(resultSet.getString("filename_of_image"))
                 .build();
         return Optional.of(productCategory);
-    }
-
-    @Override
-    public List<ProductCategory> findByField(String searchableField, EntityField<ProductCategory> nameOfField) throws DaoException {
-        List<ProductCategory> productTypeList = new ArrayList<>();
-        try (Connection connection = connectionPool.takeConnection()) {
-            try (PreparedStatement preparedStatement = connection.prepareStatement(getFindAllSql() + nameOfField.toString())) {
-                preparedStatement.setString(1, searchableField);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    Optional<ProductCategory> productTypeOptional = parseResultSet(resultSet);
-                    productTypeOptional.ifPresent(productTypeList::add);
-                }
-            }
-        } catch (SQLException | InterruptedException e) {
-            throw new DaoException("Failed to find product type by " + nameOfField.toString().toLowerCase());
-        }
-        return productTypeList;
     }
 }

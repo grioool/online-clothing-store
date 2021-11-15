@@ -107,8 +107,8 @@ public class Product extends AbstractEntity<Integer> {
                 '}';
     }
 
-    public static Product.Builder builder(){
-        return new Product.Builder();
+    public static Builder builder(){
+        return new Builder();
     }
 
     public static class Builder {

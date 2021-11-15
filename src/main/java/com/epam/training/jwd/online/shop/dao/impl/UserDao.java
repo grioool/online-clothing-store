@@ -22,16 +22,16 @@ public class UserDao extends AbstractDao<User> {
 
     private final Logger logger = LogManager.getLogger(UserDao.class);
 
-    private static final String SQL_FIND_ALL = "SELECT user.id, username, password, first_name, last_name," +
-            "email, is_blocked, phone_number, role.role_name FROM user" +
-            " INNER JOIN user_role ON user_role.id = user.role_id";
+    private static final String SQL_FIND_ALL = "SELECT \"user\".id, username, password, first_name, last_name," +
+            " email, is_blocked, phone_number, role_id FROM \"user\"" +
+            " INNER JOIN user_role ON \"user_role\".id = \"user\".role_id";
 
     private static final String SQL_SAVE_USER = "INSERT INTO \"user\"(username, password, first_name, last_name," +
             " email, is_blocked, phone_number, role_id)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE_USER = "UPDATE \"user\" SET username = ?, password = ?, first_name = ?, last_name = ?," +
-            "email = ?, is_blocked = ?, phone_ number = ?, role_id = ? WHERE id = ?";
+            "email = ?, is_blocked = ?, phone_number = ?, role_id = ? WHERE id = ?";
 
     private static final String SQL_DELETE_USER = "DELETE FROM \"user\" WHERE id = ?";
 
@@ -91,7 +91,7 @@ public class UserDao extends AbstractDao<User> {
                 .withLastName(resultSet.getString(UserField.LAST_NAME.getField()))
                 .withEmail(resultSet.getString(UserField.EMAIL.getField()))
                 .withPassword(resultSet.getString(UserField.PASSWORD.getField()))
-                .withRole(UserRole.valueOf(resultSet.getString(UserField.ROLE.getField())))
+                .withRole(UserRole.getById(resultSet.getInt(UserField.ROLE.getField())))
                 .withIsBlocked(resultSet.getBoolean(UserField.IS_BLOCK.getField()))
                 .withPhoneNumber(resultSet.getString(UserField.PHONE_NUMBER.getField()))
                 .build();

@@ -1,10 +1,10 @@
 package com.epam.training.jwd.online.shop.dao.field;
 
 public enum BasketField {
-    ID(" WHERE user.id = "),
-    USER(" WHERE user_id = ?"),
-    PRODUCT,
-    AMOUNT;
+    ID("id"),
+    USER("user_id"),
+    PRODUCT("product_id"),
+    AMOUNT("amount");
 
     private String query;
 

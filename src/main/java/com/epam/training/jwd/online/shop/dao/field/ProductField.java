@@ -1,6 +1,8 @@
 package com.epam.training.jwd.online.shop.dao.field;
 
-public enum ProductField {
+import com.epam.training.jwd.online.shop.dao.entity.Product;
+
+public enum ProductField implements EntityField<Product> {
     ID("id"),
     NAME("product_name"),
     PRICE("price"),
