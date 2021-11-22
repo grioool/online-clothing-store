@@ -17,7 +17,7 @@ public class OrderDao extends AbstractDao<Order> {
 
     public static final OrderDao INSTANCE = new OrderDao(ConnectionPoolImpl.getInstance());
 
-    private static final String SQL_FIND_ALL = "SELECT order.id, payment_method, status_id, order_cost, delivery_date," +
+    private static final String SQL_FIND_ALL = "SELECT order.id, payment_method, status_id, products, delivery_date," +
             " order_date, delivery_country_id, user_id, delivery_town_id FROM order" +
             " INNER JOIN order_status ON order_status.id = order.status_id" +
             " INNER JOIN payment_method ON payment_method.id = order.payment_method" +
@@ -25,11 +25,11 @@ public class OrderDao extends AbstractDao<Order> {
             " INNER JOIN country ON country.id = order.delivery_country_id" +
             " INNER JOIN town ON town.id = order.delivery_town_id";
 
-    private static final String SQL_SAVE_ORDER = "INSERT INTO order(payment_method, status_id, order_cost, delivery_date," +
+    private static final String SQL_SAVE_ORDER = "INSERT INTO \"order\"(payment_method, status_id, delivery_date," +
             " order_date, delivery_country_id, user_id, delivery_town_id)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    private static final String SQL_UPDATE_ORDER = "UPDATE order SET payment_method = ?, status_id = ?, order_cost = ?, delivery_date = ?," +
+    private static final String SQL_UPDATE_ORDER = "UPDATE order SET payment_method = ?, status_id = ?, products = ?, delivery_date = ?," +
             "order_date = ?, delivery_country_id = ?, user_id = ?, delivery_town_id = ? WHERE id = ?";
 
     private static final String SQL_DELETE_ORDER = "DELETE FROM order WHERE id = ?";
@@ -86,7 +86,7 @@ public class OrderDao extends AbstractDao<Order> {
                 .withId(resultSet.getInt(OrderField.ID.getField()))
                 .withPaymentMethod(PaymentMethod.getById(resultSet.getInt(OrderField.PAYMENT_METHOD.getField())))
                 .withOrderStatus(OrderStatus.getById(resultSet.getInt(OrderField.STATUS.getField())))
-                .withProducts(ProductDao.INSTANCE.findProductsInOrder(resultSet.getInt(OrderField.PRODUCTS.getField())))
+                .withProducts(ProductDao.INSTANCE.findProductsInOrder(resultSet.getInt(OrderField.ID.getField())))
                 .withDeliveryDate(resultSet.getTimestamp(OrderField.DELIVERY_DATE.getField()).toLocalDateTime())
                 .withOrderDate(resultSet.getTimestamp(OrderField.ORDER_DATE.getField()).toLocalDateTime())
                 .withDeliveryCountry(Country.getById(resultSet.getInt(OrderField.COUNTRY.getField())))

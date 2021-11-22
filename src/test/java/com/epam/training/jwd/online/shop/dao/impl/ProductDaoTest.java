@@ -24,14 +24,12 @@ class ProductDaoTest {
     public static void beforeAll() throws DaoException {
         ConnectionPoolImpl.getInstance().init();
         productCategory = ProductCategory.builder()
-                .withId(1)
                 .withCategoryName("Shoes")
                 .withImgFileName("shoes.png")
                 .build();
         productDao = ProductDao.INSTANCE;
         productCategoryDao = ProductCategoryDao.INSTANCE;
         product = Product.builder()
-                .withId(1)
                 .withProductName("black_shoes")
                 .withPrice(33.3)
                 .withBrand(Brand.GRIOOOL)
@@ -43,7 +41,8 @@ class ProductDaoTest {
 
     @Test
     void save() throws DaoException {
-        productCategoryDao.save(productCategory);
+     //   productCategoryDao.save(productCategory);
+      //  product.withProductCategory(productCategoryDao.getByName("Shoes"));
         productDao.save(product.build());
         products = productDao.findByField("black_shoes", ProductField.NAME);
         product.withId(products.get(0).getId());

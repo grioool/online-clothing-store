@@ -92,7 +92,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
             availableConnections.add((ProxyConnection) connection);
             this.notifyAll();
         } else {
-           // logger.error("Can't return connections. ");
+            logger.error("Can't return connections. ");
         }
     }
 

@@ -113,7 +113,7 @@ public class ProductDao extends AbstractDao<Product> {
         return productTypeList.get(0);
     }
 
-    protected Map<Product, Integer> findProductsInOrder(int id) throws DaoException {
+    protected Map<Product, Integer> findProductsInOrder(Integer id) throws DaoException {
         Map<Product, Integer> products = new HashMap<>();
         try (Connection connection = connectionPool.takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ORDER_ID)) {

@@ -29,7 +29,7 @@ class OrderDaoTest {
         products.put(shoes, 32);
         User user = new User();
         user = User.builder()
-                .withId(2)
+                .withId(3)
                 .withUsername("grioooddoool")
                 .withPassword("888")
                 .withFirstName("Olga")
