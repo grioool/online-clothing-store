@@ -1,12 +1,27 @@
 package com.epam.training.jwd.online.shop.controller.command.showpage;
 
-
 import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.CommandRequest;
 import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 
-public enum ShowAuthorizationPageCommand implements Command {
-    INSTANCE;
+public class ShowAuthorizationPageCommand implements Command {
+
+    private static ShowAuthorizationPageCommand instance;
+
+    private ShowAuthorizationPageCommand() {
+    }
+
+    public static ShowAuthorizationPageCommand getInstance() {
+        ShowAuthorizationPageCommand localInstance = instance;
+        if (localInstance == null) {
+            synchronized (ShowAuthorizationPageCommand.class) {
+                if (localInstance == null) {
+                    instance = localInstance = new ShowAuthorizationPageCommand();
+                }
+            }
+        }
+        return localInstance;
+    }
 
     private static final String AUTHORIZATION_PAGE_PATH = "/WEB-INF/jsp/user/authorization.jsp";
 

@@ -15,16 +15,12 @@ public class ApplicationLifecycleListener implements ServletContextListener {
     private final UserService service;
 
     public ApplicationLifecycleListener() {
-        service = UserService.simple();
+        service = UserService.getInstance();
     }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        service.create(new User(1,"admin", "olga", "grigorieva", "olga.a.grigorieva@gmail.com", "password", UserRole.ADMIN, false, "+37529" ));
+     //   service.save(new User(1,"admin", "olga", "grigorieva", "olga.a.grigorieva@gmail.com", "password", UserRole.ADMIN, false, "+37529" ));
     }
 
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        service.clear();
-    }
 }

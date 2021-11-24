@@ -8,8 +8,21 @@ import com.epam.training.jwd.online.shop.service.dto.UserService;
 
 import java.util.List;
 
-public enum ShowUsersPageCommand implements Command {
-    INSTANCE;
+public class ShowUsersPageCommand implements Command {
+
+    private static ShowUsersPageCommand instance;
+
+    public static ShowUsersPageCommand getInstance() {
+        ShowUsersPageCommand localInstance = instance;
+        if (localInstance == null) {
+            synchronized (ShowUsersPageCommand.class) {
+                if (localInstance == null) {
+                    instance = localInstance = new ShowUsersPageCommand();
+                }
+            }
+        }
+        return localInstance;
+    }
 
     private static final String USERS_ATTRIBUTE_NAME = "users";
     private static final String LANGUAGE_PARAM = "language";
@@ -27,18 +40,18 @@ public enum ShowUsersPageCommand implements Command {
         }
     };
 
-    private final UserService service;
+ //   private final UserService service;
 
     ShowUsersPageCommand() {
-        this.service = UserService.simple();
+ //       this.service = UserService.simple();
     }
 
     @Override
     public CommandResponse execute(CommandRequest request) {
         String language = request.getParameter(LANGUAGE_PARAM);
 
-        final List<User> users = service.findAll();
-        request.setAttribute(USERS_ATTRIBUTE_NAME, users);
+     //   final List<User> users = service.findAll();
+       // request.setAttribute(USERS_ATTRIBUTE_NAME, users);
         request.setAttribute(LANGUAGE_PARAM, language);
         return SHOW_USERS_PAGE_RESPONSE;
     }

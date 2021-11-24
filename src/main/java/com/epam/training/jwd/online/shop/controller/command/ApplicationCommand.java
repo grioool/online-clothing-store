@@ -3,8 +3,8 @@ package com.epam.training.jwd.online.shop.controller.command;
 
 import com.epam.training.jwd.online.shop.controller.command.authorization.LoginCommand;
 import com.epam.training.jwd.online.shop.controller.command.authorization.LogoutCommand;
-import com.epam.training.jwd.online.shop.controller.command.showpage.ShowErrorPageCommand;
 import com.epam.training.jwd.online.shop.controller.command.showpage.ShowAuthorizationPageCommand;
+import com.epam.training.jwd.online.shop.controller.command.showpage.ShowErrorPageCommand;
 import com.epam.training.jwd.online.shop.controller.command.showpage.ShowMainPageCommand;
 import com.epam.training.jwd.online.shop.controller.command.showpage.ShowUsersPageCommand;
 import com.epam.training.jwd.online.shop.dao.entity.UserRole;
@@ -16,13 +16,13 @@ import static com.epam.training.jwd.online.shop.dao.entity.UserRole.*;
 
 
 public enum ApplicationCommand {
-    MAIN_PAGE(ShowMainPageCommand.INSTANCE),
-    SHOW_USERS(ShowUsersPageCommand.INSTANCE, ADMIN),
-    AUTHORIZATION(LoginCommand.INSTANCE, UNAUTHORIZED),
-    SHOW_AUTHORIZATION(ShowAuthorizationPageCommand.INSTANCE, UNAUTHORIZED),
-    LOGOUT(LogoutCommand.INSTANCE, USER, ADMIN),
-    ERROR(ShowErrorPageCommand.INSTANCE),
-    DEFAULT(ShowMainPageCommand.INSTANCE);
+    MAIN_PAGE(ShowMainPageCommand.getInstance()),
+    SHOW_USERS(ShowUsersPageCommand.getInstance(), ADMIN),
+    AUTHORIZATION(LoginCommand.getInstance(), UNAUTHORIZED),
+    SHOW_AUTHORIZATION(ShowAuthorizationPageCommand.getInstance(), UNAUTHORIZED),
+    LOGOUT(LogoutCommand.getInstance(), USER, ADMIN),
+    ERROR(ShowErrorPageCommand.getInstance()),
+    DEFAULT(ShowMainPageCommand.getInstance());
 
     private final Command command;
     private final List<UserRole> allowedRoles;

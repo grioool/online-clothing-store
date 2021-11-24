@@ -1,5 +1,6 @@
 package com.epam.training.jwd.online.shop.dao.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
@@ -13,6 +14,7 @@ public class Order extends AbstractEntity<Integer> {
     private Country deliveryCountry;
     private Town deliveryTown;
     private User user;
+    private BigDecimal orderCost;
 
     public Order() {}
 
@@ -90,6 +92,14 @@ public class Order extends AbstractEntity<Integer> {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public BigDecimal getOrderCost() {
+        return orderCost;
+    }
+
+    public void setOrderCost(BigDecimal orderCost) {
+        this.orderCost = orderCost;
     }
 
     @Override

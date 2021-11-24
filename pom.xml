@@ -7,6 +7,7 @@
     <groupId>com.epam.training.jwd.online.shop</groupId>
     <artifactId>online_clothing_store</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,6 +32,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
         <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>

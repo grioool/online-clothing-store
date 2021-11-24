@@ -5,12 +5,27 @@ import com.epam.training.jwd.online.shop.controller.command.CommandRequest;
 import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
+import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.UserService;
 
 import javax.servlet.http.HttpSession;
 
-public enum LoginCommand implements Command {
-    INSTANCE;
+public class LoginCommand implements Command {
+
+    private static volatile LoginCommand instance;
+
+    public static LoginCommand getInstance() {
+        LoginCommand localInstance = instance;
+        if (localInstance == null) {
+            synchronized (LoginCommand.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new LoginCommand();
+                }
+            }
+        }
+        return localInstance;
+    }
 
     private static final String LOGIN_PARAM_NAME = "authorization";
     private static final String USERNAME_SESSION_ATTRIB_NAME = "username";
@@ -49,10 +64,10 @@ public enum LoginCommand implements Command {
             return true;
         }
     };
-    private final UserService service;
+    private UserService service;
 
     LoginCommand() {
-        service = UserService.simple();
+       service = UserService.getInstance();
     }
 
     @Override
@@ -64,6 +79,7 @@ public enum LoginCommand implements Command {
             return prepareErrorPage(request);
         }
         return addUserInfoToSession(request, login);
+        return null;
     }
 
     private CommandResponse prepareErrorPage(CommandRequest request) {
@@ -71,10 +87,10 @@ public enum LoginCommand implements Command {
         return LOGIN_ERROR_RESPONSE;
     }
 
-    private CommandResponse addUserInfoToSession(CommandRequest request, String login) throws EntityNotFoundException {
+    private CommandResponse addUserInfoToSession(CommandRequest request, String login) throws EntityNotFoundException, ServiceException {
         request.getCurrentSession().ifPresent(HttpSession::invalidate);
         final HttpSession session = request.createSession();
-        final User loggedInUser = service.findByLogin(login);
+        final User loggedInUser = service.findByUsername(login);
         session.setAttribute(USERNAME_SESSION_ATTRIB_NAME, loggedInUser.getUsername());
         session.setAttribute(FIRST_NAME_PARAM, loggedInUser.getFirstName());
         session.setAttribute(LAST_NAME_PARAM, loggedInUser.getLastName());
