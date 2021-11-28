@@ -1,5 +1,7 @@
 package com.epam.training.jwd.online.shop.controller.config;
 
+import com.epam.training.jwd.online.shop.util.PropertyReaderUtil;
+
 import java.util.Properties;
 
 public class DatabaseConfig {
