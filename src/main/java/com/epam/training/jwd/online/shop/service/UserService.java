@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service;
 
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;

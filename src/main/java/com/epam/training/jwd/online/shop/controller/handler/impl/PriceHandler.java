@@ -26,7 +26,7 @@ public class PriceHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String price = requestContext.getRequestParameters().get(RequestConstant.PRODUCT_PRICE);
 
-        if (StringUtils.isNullOrEmpty(price) || !price.matches(PRICE_REGEX)) {
+        if (price == null || price.isEmpty() || !price.matches(PRICE_REGEX)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.price"));
         }
 

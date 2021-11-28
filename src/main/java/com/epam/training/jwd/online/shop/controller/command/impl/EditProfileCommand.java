@@ -9,10 +9,9 @@ import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.NameHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.PhoneNumberHandler;
 import com.epam.training.jwd.online.shop.dao.entity.User;
-import com.epam.training.jwd.online.shop.dao.entity.UserRole;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.UserDto;
-import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

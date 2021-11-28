@@ -7,7 +7,7 @@ import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

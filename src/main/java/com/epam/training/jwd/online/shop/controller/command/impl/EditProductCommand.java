@@ -13,7 +13,8 @@ import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHand
 import com.epam.training.jwd.online.shop.dao.entity.Brand;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +30,7 @@ public class EditProductCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCommand.class);
     private static final ProductServiceImpl productService = ProductServiceImpl.getInstance();
     private static final Handler editProductPrice = new PriceHandler(new ProductNameHandler(new DescriptionHandler()));
+    private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
 
     @Override
     public ResponseContext execute(RequestContext request) {
@@ -42,15 +44,14 @@ public class EditProductCommand implements Command, AdminCommand {
             Integer productId = Integer.parseInt(id);
             String price = request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE);
             String productName = request.getRequestParameters().get(RequestConstant.PRODUCT_NAME);
-            BigDecimal productPrice = new BigDecimal(price);
+            Double productPrice = Double.parseDouble(price);
             String productDescription = request.getRequestParameters().get(RequestConstant.PRODUCT_DESCRIPTION);
-            String brand = request.getRequestParameters().get(RequestConstant.PRODUCT_BRAND);
-            String category = request.getRequestParameters().get(RequestConstant.PRODUCT_CATEGORY);
+            Brand brand = Brand.valueOf(request.getRequestParameters().get(RequestConstant.PRODUCT_BRAND));
             String article = request.getRequestParameters().get(RequestConstant.PRODUCT_ARTICLE);
+            Integer productArticle = Integer.parseInt(article);
 
             try {
-                Optional<String> serverMessage = productService.editProduct(productId, productName, productDescription, brand, category, productPrice, article);
-);
+                Optional<String> serverMessage = productService.editProduct(productId, productName, productDescription, brand, productPrice, productArticle);
 
                 if (!serverMessage.isPresent()) {
                     requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU_ITEM.getCommandName());

@@ -9,7 +9,7 @@ import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.ProductCategoryServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

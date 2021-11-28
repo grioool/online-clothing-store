@@ -1,16 +1,11 @@
 package com.epam.training.jwd.online.shop.controller.handler.impl;
 
-import com.epam.jwd.cafe.command.RequestContext;
-import com.epam.jwd.cafe.command.constant.RequestConstant;
-import com.epam.jwd.cafe.handler.AbstractHandler;
-import com.epam.jwd.cafe.handler.Handler;
-import com.epam.jwd.cafe.util.LocalizationMessage;
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
 import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
-import com.mysql.cj.util.StringUtils;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +25,7 @@ public class MatchingPasswordsHandler extends AbstractHandler {
         String password = requestContext.getRequestParameters().get(RequestConstant.PASSWORD);
         String repeatPassword = requestContext.getRequestParameters().get(RequestConstant.REPEAT_PASSWORD);
 
-        if (StringUtils.isNullOrEmpty(password) || StringUtils.isNullOrEmpty(repeatPassword)) {
+        if (password.isEmpty() || password == null) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.password"));
         } else if (!password.equals(repeatPassword)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.repeatPassword"));

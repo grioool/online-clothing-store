@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service;
 
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;

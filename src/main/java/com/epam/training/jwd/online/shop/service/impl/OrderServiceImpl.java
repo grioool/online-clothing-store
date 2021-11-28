@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service.impl;
 
 import com.epam.training.jwd.online.shop.dao.entity.Order;
 import com.epam.training.jwd.online.shop.dao.entity.User;
@@ -6,13 +6,15 @@ import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.dao.field.OrderField;
 import com.epam.training.jwd.online.shop.dao.impl.OrderDao;
+import com.epam.training.jwd.online.shop.service.OrderService;
+import com.epam.training.jwd.online.shop.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
     private final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
     private static volatile OrderServiceImpl instance;
     private final UserService userService = UserServiceImpl.getInstance();
@@ -44,7 +46,7 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
-    public Optional<String> createOrder(Order order) {
+    public Optional<String> saveOrder(Order order) {
         User orderUser = order.getUser();
 
         if (orderUser.isBlocked()) {
@@ -61,15 +63,13 @@ public class OrderServiceImpl implements OrderService{
         return Optional.empty();
     }
 
-    public Optional<Order> findOrderById(Integer orderId) throws ServiceException {
-        Order order;
+    public Optional<Order> findOrderById(Integer orderId) {
         try {
-            order = orderDao.findById(orderId);
+            return Optional.ofNullable(orderDao.findById(orderId));
         } catch (DaoException e) {
             logger.error("Failed on a order search");
             throw new ServiceException("Failed search order by id", e);
         }
-        return order != null ? Optional.of(order) : Optional.empty();
     }
 
     public List<Order> findAllOrdersByUserId(Integer userId) {

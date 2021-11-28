@@ -12,7 +12,7 @@ public class PageConstant {
     public static final String MENU_PAGE = "/WEB-INF/pages/menu.jsp";
     public static final String PRODUCTS_PAGE = "/WEB-INF/pages/products.jsp";
     public static final String ADD_PRODUCT = "/WEB-INF/pages/admin/addProduct.jsp";
-    public static final String CREATE_ORDER = "/WEB-INF/pages/secured/createOrder.jsp";
+    public static final String CREATE_ORDER = "/WEB-INF/pages/secured/saveOrder.jsp";
     public static final String MY_ORDERS_PAGE = "WEB-INF/pages/secured/myOrders.jsp";
     public static final String ERROR_404 = "/WEB-INF/pages/error/404.jsp";
     public static final String ERROR_PAGE = "/WEB-INF/pages/error/error.jsp";

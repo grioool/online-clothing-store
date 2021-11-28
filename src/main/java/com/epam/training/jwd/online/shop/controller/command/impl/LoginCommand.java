@@ -1,6 +1,7 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
@@ -8,7 +9,8 @@ import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.PasswordHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.UsernameHandler;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
+import com.epam.training.jwd.online.shop.domain.security.PasswordEncoder;
+import com.epam.training.jwd.online.shop.service.impl.UserServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import static at.favre.lib.crypto.bcrypt.BCrypt.MIN_COST;
 
 
 public class LoginCommand implements Command {

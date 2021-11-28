@@ -25,7 +25,7 @@ public class DescriptionHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String description = requestContext.getRequestParameters().get(RequestConstant.PRODUCT_DESCRIPTION);
 
-        if (StringUtils.isNullOrEmpty(description) || description.length() < 4 || description.length() > 80) {
+        if (description == null || description.length() < 4 || description.length() > 80) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.description"));
         }
 

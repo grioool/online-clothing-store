@@ -26,7 +26,7 @@ public class NameHandler extends AbstractHandler {
         String firstName = requestContext.getRequestParameters().get(RequestConstant.FIRST_NAME);
         String lastName = requestContext.getRequestParameters().get(RequestConstant.LAST_NAME);
 
-        if (StringUtils.isNullOrEmpty(firstName) || StringUtils.isNullOrEmpty(lastName)
+        if (firstName == null || firstName.isEmpty()
                 || !firstName.matches(NAME_PATTERN) || !lastName.matches(NAME_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.name"));
         }

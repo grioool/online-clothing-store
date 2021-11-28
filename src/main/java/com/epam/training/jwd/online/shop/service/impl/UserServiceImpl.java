@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service.impl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.epam.training.jwd.online.shop.dao.entity.User;
@@ -6,7 +6,8 @@ import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.dao.field.UserField;
 import com.epam.training.jwd.online.shop.dao.impl.UserDao;
-import lombok.Getter;
+import com.epam.training.jwd.online.shop.service.UserService;
+import com.epam.training.jwd.online.shop.service.dto.UserDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -12,15 +12,14 @@ import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHand
 import com.epam.training.jwd.online.shop.dao.entity.Product;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.ProductCategoryServiceImpl;
-import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
 
 

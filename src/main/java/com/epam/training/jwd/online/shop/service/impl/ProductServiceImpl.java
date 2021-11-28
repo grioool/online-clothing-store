@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service.impl;
 
 import com.epam.training.jwd.online.shop.dao.entity.Brand;
 import com.epam.training.jwd.online.shop.dao.entity.Product;
@@ -7,6 +7,8 @@ import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.dao.field.ProductField;
 import com.epam.training.jwd.online.shop.dao.impl.ProductDao;
+import com.epam.training.jwd.online.shop.service.OrderService;
+import com.epam.training.jwd.online.shop.service.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,10 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     private static volatile ProductServiceImpl instance;
     private final Logger logger = LogManager.getLogger(ProductServiceImpl.class);
-    public static final ProductServiceImpl INSTANCE = new ProductServiceImpl(ProductDao.INSTANCE);
     private static final ProductDao productDao = ProductDao.INSTANCE;
 
     public static ProductServiceImpl getInstance() {
@@ -39,35 +40,30 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public List<Product> findAllProducts() {
-        List<Product> products;
         try {
-            products = productDao.findAll();
+            return productDao.findAll();
         } catch (DaoException e) {
             logger.error("Failed to find all products");
             throw new ServiceException(e);
         }
-        return products;
     }
 
     public Optional<Product> findProductById(Integer productId) {
-        Product product;
         try {
-            product = productDao.findById(productId);
+            return Optional.ofNullable(productDao.findById(productId));
         } catch (DaoException e) {
             logger.error("Failed on a order search");
             throw new ServiceException("Failed search order by id", e);
         }
-        return product != null ? Optional.of(product) : Optional.empty();
     }
 
     public Optional<Product> findProductByName(String name) {
         return findProductByUniqueField(name, ProductField.NAME);
     }
 
-
     public List<Product> findProductsByCategoryId(Integer categoryId) {
         try {
-            return productDao.findByField(String.valueOf(categoryId), ProductField.CATEGORY);
+            return productDao.findByField(categoryId, ProductField.CATEGORY);
         } catch (DaoException e) {
             logger.error("Failed to find all products with type id = " + categoryId);
             throw new ServiceException(e);
@@ -107,7 +103,7 @@ public class ProductServiceImpl implements ProductService{
         return totalCost;
     }
 
-    public Optional<String> editProduct(Integer productId, String productName, String productDescription, Brand brand, ProductCategory category, Double price, Integer article) {
+    public Optional<String> editProduct(Integer productId, String productName, String productDescription, Brand brand, Double price, Integer article) {
         Optional<Product> productOptional = findProductById(productId);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
@@ -119,7 +115,7 @@ public class ProductServiceImpl implements ProductService{
                     .withId(productId)
                     .withProductName(productName)
                     .withBrand(brand)
-                    .withProductCategory(category)
+                    .withProductCategory(product.getCategory())
                     .withProductName(productName)
                     .withPrice(price)
                     .withNameOfImage(product.getNameOfImage())
@@ -143,7 +139,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public void deleteAllProductsByCategoryId(Integer categoryId) {
-        OrderServiceImpl orderService = OrderServiceImpl.getInstance();
+        OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Product> products = productDao.findByField(categoryId, ProductField.CATEGORY);
             for (Product product : products) {

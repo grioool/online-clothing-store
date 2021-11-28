@@ -25,7 +25,7 @@ public class PhoneNumberHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String phoneNumber = requestContext.getRequestParameters().get(RequestConstant.PHONE_NUMBER);
 
-        if (StringUtils.isNullOrEmpty(phoneNumber) || !phoneNumber.matches(PHONE_NUMBER_PATTERN)) {
+        if (phoneNumber == null || phoneNumber.isEmpty() || !phoneNumber.matches(PHONE_NUMBER_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.phoneNumber"));
         }
 

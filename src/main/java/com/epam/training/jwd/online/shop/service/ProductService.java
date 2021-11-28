@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service;
 
 import com.epam.training.jwd.online.shop.dao.entity.Brand;
 import com.epam.training.jwd.online.shop.dao.entity.Product;
@@ -26,7 +26,7 @@ public interface ProductService {
 
     BigDecimal calcOrderCost(Map<Product, Integer> productsInCart);
 
-    Optional<String> editProduct(Integer id, String productName, String productDescription, Brand brand, ProductCategory category, Double price, Integer article);
+    Optional<String> editProduct(Integer id, String productName, String productDescription, Brand brand, Double price, Integer article);
 
     void deleteProduct(Product product);
 

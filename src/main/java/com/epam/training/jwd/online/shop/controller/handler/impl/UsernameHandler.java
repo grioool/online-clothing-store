@@ -26,7 +26,7 @@ public class UsernameHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String username = requestContext.getRequestParameters().get(RequestConstant.USERNAME);
 
-        if (StringUtils.isNullOrEmpty(username) || !username.matches(USERNAME_PATTERN)) {
+        if (username == null || username.isEmpty() || !username.matches(USERNAME_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.username"));
         }
 

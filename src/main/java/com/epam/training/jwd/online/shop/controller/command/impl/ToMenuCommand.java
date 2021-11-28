@@ -9,7 +9,7 @@ import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.ProductCategoryServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class ToMenuCommand implements Command {
         ResponseContext responseContext;
         try {
             List<ProductCategory> productCategories = ProductCategoryServiceImpl.getInstance().findAllProductCategories();
-            requestMap.put(RequestConstant.PRODUCT_TYPES, productCategories);
+            requestMap.put(RequestConstant.PRODUCT_CATEGORIES, productCategories);
             responseContext = new ResponseContext(new ForwardResponseType(PageConstant.MENU_PAGE), requestMap, new HashMap<>());
         } catch (ServiceException e) {
             logger.error("Failed to find all product types", e);

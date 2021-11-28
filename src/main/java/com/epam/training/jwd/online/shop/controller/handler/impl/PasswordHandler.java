@@ -25,7 +25,7 @@ public class PasswordHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String password = requestContext.getRequestParameters().get(RequestConstant.PASSWORD);
 
-        if (StringUtils.isNullOrEmpty(password) || !password.matches(PASSWORD_PATTERN)) {
+        if (password == null || password.isEmpty() || !password.matches(PASSWORD_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.password"));
         }
 

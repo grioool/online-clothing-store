@@ -7,10 +7,10 @@ import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.dao.entity.*;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.dto.OrderServiceImpl;
-import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.OrderServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.UserDto;
-import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
+import com.epam.training.jwd.online.shop.service.impl.UserServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,7 +67,7 @@ public class CreateOrderCommand implements Command, UserCommand {
                      //   .withOrderCost()
                         .build();
 
-                Optional<String> serverMessage = orderService.createOrder(order);
+                Optional<String> serverMessage = orderService.saveOrder(order);
 
                 if (!serverMessage.isPresent()) {
                     sessionMap.put(RequestConstant.CART, new HashMap<>());

@@ -23,7 +23,7 @@ public class EmailHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String email = requestContext.getRequestParameters().get(RequestConstant.EMAIL);
 
-        if (StringUtils.isNullOrEmpty(email) || !email.matches(EMAIL_PATTERN)) {
+        if (email == null || email.isEmpty() || !email.matches(EMAIL_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.mail"));
         }
 

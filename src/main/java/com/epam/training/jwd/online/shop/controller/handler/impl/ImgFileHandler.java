@@ -26,7 +26,7 @@ public class ImgFileHandler extends AbstractHandler {
         Set<String> errorMessage = new HashSet<>();
         Part imgFile = requestContext.getRequestParts().get(RequestConstant.IMG_FILE);
 
-        if (imgFile == null || StringUtils.isNullOrEmpty(imgFile.getSubmittedFileName())
+        if (imgFile == null || imgFile.getSubmittedFileName() == null || imgFile.getSubmittedFileName().isEmpty()
               || (!imgFile.getSubmittedFileName().endsWith(".png") && !imgFile.getSubmittedFileName().endsWith(".jpg"))){
 
             errorMessage.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.incorrectImg"));

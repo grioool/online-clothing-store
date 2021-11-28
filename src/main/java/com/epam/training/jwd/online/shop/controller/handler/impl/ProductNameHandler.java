@@ -25,7 +25,7 @@ public class ProductNameHandler extends AbstractHandler {
         Set<String> errorMessages = new HashSet<>();
         String name = requestContext.getRequestParameters().get(RequestConstant.PRODUCT_NAME);
 
-        if (StringUtils.isNullOrEmpty(name) || !name.matches(PRODUCT_NAME_PATTERN)) {
+        if (name == null || name.isEmpty() || !name.matches(PRODUCT_NAME_PATTERN)) {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.productName"));
         }
 

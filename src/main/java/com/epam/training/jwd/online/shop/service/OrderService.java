@@ -1,4 +1,4 @@
-package com.epam.training.jwd.online.shop.service.dto;
+package com.epam.training.jwd.online.shop.service;
 
 import com.epam.training.jwd.online.shop.dao.entity.Order;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
@@ -10,7 +10,7 @@ public interface OrderService {
 
     List<Order> findAllOrders();
 
-    Optional<String> createOrder(Order order);
+    Optional<String> saveOrder(Order order);
 
     Optional<Order> findOrderById(Integer orderId);
 
