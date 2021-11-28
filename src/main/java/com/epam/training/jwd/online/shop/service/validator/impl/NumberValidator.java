@@ -1,27 +1,27 @@
-package com.epam.training.jwd.online.shop.controller.handler.impl;
+package com.epam.training.jwd.online.shop.service.validator.impl;
 
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
-import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
+import com.epam.training.jwd.online.shop.service.validator.AbstractValidator;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class NumberHandler extends AbstractHandler {
+public class NumberValidator extends AbstractValidator {
     private final String number;
 
-    public NumberHandler(String number) {
+    public NumberValidator(String number) {
         this.number = number;
     }
 
-    public NumberHandler(Handler nextHandler, String number) {
-        super(nextHandler);
+    public NumberValidator(Validator nextValidator, String number) {
+        super(nextValidator);
         this.number = number;
     }
 
     @Override
-    public Set<String> handleRequest(RequestContext requestContext) {
+    public Set<String> validateRequest(RequestContext requestContext) {
         Set<String> errorMessages = new HashSet<>();
         try {
             Integer.parseInt(number);
@@ -34,8 +34,8 @@ public class NumberHandler extends AbstractHandler {
                     LocalizationMessage.localize(requestContext.getLocale(), "error.incorrectNumber"));
         }
 
-        if (nextHandler != null) {
-            errorMessages.addAll(nextHandler.handleRequest(requestContext));
+        if (nextValidator != null) {
+            errorMessages.addAll(nextValidator.validateRequest(requestContext));
         }
 
         return errorMessages;

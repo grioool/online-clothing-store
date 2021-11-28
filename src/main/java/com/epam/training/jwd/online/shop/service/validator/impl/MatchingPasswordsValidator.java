@@ -1,26 +1,26 @@
-package com.epam.training.jwd.online.shop.controller.handler.impl;
+package com.epam.training.jwd.online.shop.service.validator.impl;
 
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
+import com.epam.training.jwd.online.shop.service.validator.AbstractValidator;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class MatchingPasswordsHandler extends AbstractHandler {
+public class MatchingPasswordsValidator extends AbstractValidator {
 
-    public MatchingPasswordsHandler(Handler nextHandler) {
-        super(nextHandler);
+    public MatchingPasswordsValidator(Validator nextValidator) {
+        super(nextValidator);
     }
 
-    public MatchingPasswordsHandler() {
+    public MatchingPasswordsValidator() {
     }
 
     @Override
-    public Set<String> handleRequest(RequestContext requestContext) {
+    public Set<String> validateRequest(RequestContext requestContext) {
         Set<String> errorMessages = new HashSet<>();
         String password = requestContext.getRequestParameters().get(RequestConstant.PASSWORD);
         String repeatPassword = requestContext.getRequestParameters().get(RequestConstant.REPEAT_PASSWORD);
@@ -31,8 +31,8 @@ public class MatchingPasswordsHandler extends AbstractHandler {
             errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "error.repeatPassword"));
         }
 
-        if (nextHandler != null) {
-            errorMessages.addAll(nextHandler.handleRequest(requestContext));
+        if (nextValidator != null) {
+            errorMessages.addAll(nextValidator.validateRequest(requestContext));
         }
 
         return errorMessages;

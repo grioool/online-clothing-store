@@ -5,7 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
+import com.epam.training.jwd.online.shop.service.validator.impl.NumberValidator;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +22,7 @@ public class AddProductToCartCommand implements Command, UserCommand {
     @Override
     public ResponseContext execute(RequestContext request) {
         String id = request.getRequestParameters().get(RequestConstant.ID);
-        Set<String> errorMessage = new NumberHandler(request.getRequestParameters().get(RequestConstant.ID)).handleRequest(request);
+        Set<String> errorMessage = new NumberValidator(request.getRequestParameters().get(RequestConstant.ID)).validateRequest(request);
 
         if (errorMessage.isEmpty()) {
             int productId = Integer.parseInt(id);

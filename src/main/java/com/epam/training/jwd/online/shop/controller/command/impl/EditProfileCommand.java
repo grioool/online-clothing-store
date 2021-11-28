@@ -5,9 +5,9 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.NameHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.PhoneNumberHandler;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
+import com.epam.training.jwd.online.shop.service.validator.impl.NameValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.PhoneNumberValidator;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.UserDto;
@@ -24,11 +24,11 @@ import java.util.Set;
 public class EditProfileCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(EditProfileCommand.class);
     private static final UserServiceImpl userService = UserServiceImpl.getInstance();
-    private static final Handler editHandler = new NameHandler(new PhoneNumberHandler());
+    private static final Validator EDIT_VALIDATOR = new NameValidator(new PhoneNumberValidator());
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        Set<String> errorMessages = editHandler.handleRequest(request);
+        Set<String> errorMessages = EDIT_VALIDATOR.validateRequest(request);
         Map<String, Object> requestMap = new HashMap<>();
 
         if (errorMessages.isEmpty()) {

@@ -5,7 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
+import com.epam.training.jwd.online.shop.service.validator.impl.NumberValidator;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.impl.UserServiceImpl;
@@ -23,8 +23,8 @@ public class UpdateUserCommand implements Command, AdminCommand {
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        Set<String> errorMessages = new NumberHandler(request.getRequestParameters()
-                .get(RequestConstant.LOYALTY_POINTS)).handleRequest(request);
+        Set<String> errorMessages = new NumberValidator(request.getRequestParameters()
+                .get(RequestConstant.LOYALTY_POINTS)).validateRequest(request);
 
         if (errorMessages.isEmpty()) {
             try {

@@ -1,13 +1,12 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.PasswordHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.UsernameHandler;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
+import com.epam.training.jwd.online.shop.service.validator.impl.PasswordValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.UsernameValidator;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.domain.security.PasswordEncoder;
 import com.epam.training.jwd.online.shop.service.impl.UserServiceImpl;
@@ -20,18 +19,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static at.favre.lib.crypto.bcrypt.BCrypt.MIN_COST;
-
 
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
     private static final UserServiceImpl userService = UserServiceImpl.getInstance();
-    private static final Handler loginHandler = new UsernameHandler(new PasswordHandler());
+    private static final Validator LOGIN_VALIDATOR = new UsernameValidator(new PasswordValidator());
 
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        Set<String> errorMessages = loginHandler.handleRequest(request);
+        Set<String> errorMessages = LOGIN_VALIDATOR.validateRequest(request);
         ResponseContext responseContext;
 
         if (errorMessages.isEmpty()) {

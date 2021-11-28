@@ -5,7 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
+import com.epam.training.jwd.online.shop.service.validator.impl.NumberValidator;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +23,7 @@ public class DeleteProductFromCartCommand implements Command, UserCommand {
     public ResponseContext execute(RequestContext request) {
         Map<String, Object> requestMap = new HashMap<>();
         String id = request.getRequestParameters().get(RequestConstant.ID);
-        Set<String> errorMessage = new NumberHandler(id).handleRequest(request);
+        Set<String> errorMessage = new NumberValidator(id).validateRequest(request);
 
         if (errorMessage.isEmpty()) {
             try {

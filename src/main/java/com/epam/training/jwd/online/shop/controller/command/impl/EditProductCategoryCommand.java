@@ -5,9 +5,9 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
+import com.epam.training.jwd.online.shop.service.validator.impl.ImgFileValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.ProductNameValidator;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
@@ -22,11 +22,11 @@ import java.util.*;
 public class EditProductCategoryCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCategoryCommand.class);
     private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
-    private static final Handler editHandler = new ProductNameHandler(new ImgFileHandler());
+    private static final Validator EDIT_VALIDATOR = new ProductNameValidator(new ImgFileValidator());
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        Set<String> errorMessages = editHandler.handleRequest(request);
+        Set<String> errorMessages = EDIT_VALIDATOR.validateRequest(request);
         Map<String, Object> requestMap = new HashMap<>();
 
         if (errorMessages.isEmpty()) {

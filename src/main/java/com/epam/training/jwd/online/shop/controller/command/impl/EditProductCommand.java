@@ -5,13 +5,12 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.DescriptionHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.PriceHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
+import com.epam.training.jwd.online.shop.service.validator.impl.DescriptionValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.NumberValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.PriceValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.ProductNameValidator;
 import com.epam.training.jwd.online.shop.dao.entity.Brand;
-import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
@@ -19,7 +18,6 @@ import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -29,7 +27,7 @@ import java.util.Set;
 public class EditProductCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCommand.class);
     private static final ProductServiceImpl productService = ProductServiceImpl.getInstance();
-    private static final Handler editProductPrice = new PriceHandler(new ProductNameHandler(new DescriptionHandler()));
+    private static final Validator editProductPrice = new PriceValidator(new ProductNameValidator(new DescriptionValidator()));
     private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
 
     @Override
@@ -38,7 +36,7 @@ public class EditProductCommand implements Command, AdminCommand {
         Map<String, Object> requestMap = new HashMap<>();
 
         String id = request.getRequestParameters().get(RequestConstant.ID);
-        Set<String> errorMessage = new NumberHandler(editProductPrice, id).handleRequest(request);
+        Set<String> errorMessage = new NumberValidator(editProductPrice, id).validateRequest(request);
 
         if (errorMessage.isEmpty()) {
             Integer productId = Integer.parseInt(id);

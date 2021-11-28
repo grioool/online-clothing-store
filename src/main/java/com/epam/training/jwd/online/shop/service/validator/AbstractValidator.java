@@ -1,9 +1,14 @@
 package com.epam.training.jwd.online.shop.service.validator;
 
-public abstract class AbstractValidator implements Validator {
-    protected Validator next;
 
-    public AbstractValidator(final Validator next) {
-        this.next = next;
+public abstract class AbstractValidator implements Validator {
+    protected final Validator nextValidator;
+
+    public AbstractValidator(Validator nextValidator) {
+        this.nextValidator = nextValidator;
+    }
+
+    public AbstractValidator() {
+        nextValidator = null;
     }
 }

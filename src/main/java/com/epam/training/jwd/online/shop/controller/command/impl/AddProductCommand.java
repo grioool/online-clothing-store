@@ -4,11 +4,11 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.controller.handler.Handler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.DescriptionHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.PriceHandler;
-import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
+import com.epam.training.jwd.online.shop.service.validator.Validator;
+import com.epam.training.jwd.online.shop.service.validator.impl.DescriptionValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.ImgFileValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.PriceValidator;
+import com.epam.training.jwd.online.shop.service.validator.impl.ProductNameValidator;
 import com.epam.training.jwd.online.shop.dao.entity.Product;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
@@ -28,12 +28,12 @@ public class AddProductCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(AddProductCommand.class);
     private static final ProductServiceImpl productService = ProductServiceImpl.getInstance();
     private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
-    private static final Handler productHandler = new ProductNameHandler(new PriceHandler(
-            new DescriptionHandler(new ImgFileHandler())));
+    private static final Validator PRODUCT_VALIDATOR = new ProductNameValidator(new PriceValidator(
+            new DescriptionValidator(new ImgFileValidator())));
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        Set<String> errorMessages = productHandler.handleRequest(request);
+        Set<String> errorMessages = PRODUCT_VALIDATOR.validateRequest(request);
         Map<String, Object> requestMap = new HashMap<>();
 
         if (errorMessages.isEmpty()) {
