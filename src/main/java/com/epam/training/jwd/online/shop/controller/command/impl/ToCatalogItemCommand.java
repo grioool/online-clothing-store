@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class ToMenuItemCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(ToMenuItemCommand.class);
+public class ToCatalogItemCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(ToCatalogItemCommand.class);
     private static final ProductServiceImpl productService = ProductServiceImpl.getInstance();
     private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
 
@@ -47,7 +47,7 @@ public class ToMenuItemCommand implements Command {
                 responseContext = new ResponseContext(new ForwardResponseType(PageConstant.PRODUCTS_PAGE), new HashMap<>(), new HashMap<>());
             }
         } catch (ServiceException | NumberFormatException e) {
-            logger.error("Moving to menu item has failed", e);
+            logger.error("Moving to catalog item has failed", e);
             responseContext = new ResponseContext(new ForwardResponseType(PageConstant.ERROR_PAGE), new HashMap<>(), new HashMap<>());
         }
         return responseContext;

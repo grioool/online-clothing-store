@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ToMenuCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(ToMenuCommand.class);
+public class ToCatalogCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(ToCatalogCommand.class);
 
     @Override
     public ResponseContext execute(RequestContext request) {
