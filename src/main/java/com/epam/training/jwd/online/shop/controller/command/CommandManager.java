@@ -32,8 +32,7 @@ public enum CommandManager {
     EDIT_PRODUCT(new EditProductCommand(), "edit_product"),
     DELETE_PRODUCT(new DeleteProductCommand(), "delete_product"),
     DELETE_PRODUCT_FROM_CART(new DeleteProductFromCartCommand(), "delete_product_from_cart"),
-    CREATE_ORDER(new CreateOrderCommand(), "create_order"),
-    ADD_BALANCE_TO_USER(new AddBalanceCommand(), "add_balance_to_user");
+    CREATE_ORDER(new CreateOrderCommand(), "create_order");
 
     private final Command command;
     private final String commandName;

@@ -1,1 +1,0 @@
-# jwd-july-web
