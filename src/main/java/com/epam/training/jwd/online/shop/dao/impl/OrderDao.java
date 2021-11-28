@@ -92,6 +92,7 @@ public class OrderDao extends AbstractDao<Order> {
                 .withUser(UserDao.INSTANCE.findById(resultSet.getInt(OrderField.USER.getField())))
                 .withDeliveryTown(Town.getById(resultSet.getInt(OrderField.TOWN.getField())))
                 .withProducts(ProductDao.INSTANCE.findProductsInOrder(resultSet.getInt("id")))
+                .withOrderCost(resultSet.getBigDecimal(OrderField.ORDER_COST.getField()))
                 .build();
         return Optional.of(order);
     }

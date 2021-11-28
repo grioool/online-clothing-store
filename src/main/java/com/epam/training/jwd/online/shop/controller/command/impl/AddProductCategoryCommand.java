@@ -4,6 +4,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
@@ -15,11 +16,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Handler;
 
 
 public class AddProductCategoryCommand implements Command, AdminCommand {
-    private static final Logger LOGGER = LogManager.getLogger(AddProductCategoryCommand.class);
+    private static final Logger logger = LogManager.getLogger(AddProductCategoryCommand.class);
     private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
     private static final Handler productCategoryHandler = new ImgFileHandler(new ProductNameHandler());
 
@@ -49,7 +49,7 @@ public class AddProductCategoryCommand implements Command, AdminCommand {
                 }
                 responseContext = new ResponseContext(new RestResponseType(), requestMap, new HashMap<>());
             } catch (ServiceException | IOException e) {
-                LOGGER.error("Failed to add product type", e);
+                logger.error("Failed to add product type", e);
                 responseContext = new ResponseContext(new ForwardResponseType(PageConstant.ERROR_PAGE));
             }
         } else {

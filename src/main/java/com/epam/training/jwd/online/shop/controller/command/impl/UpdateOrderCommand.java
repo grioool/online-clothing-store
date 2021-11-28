@@ -5,9 +5,11 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
-import com.epam.training.jwd.online.shop.dao.entity.Order;
-import com.epam.training.jwd.online.shop.dao.entity.OrderStatus;
+import com.epam.training.jwd.online.shop.dao.entity.*;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
+import com.epam.training.jwd.online.shop.dao.field.OrderField;
+import com.epam.training.jwd.online.shop.dao.impl.ProductDao;
+import com.epam.training.jwd.online.shop.dao.impl.UserDao;
 import com.epam.training.jwd.online.shop.service.dto.OrderServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,17 +30,18 @@ public class UpdateOrderCommand implements Command, AdminCommand {
             OrderStatus orderStatus = OrderStatus.valueOf(request.getRequestParameters().get(RequestConstant.SELECT));
             Optional<Order> orderOptional = orderService.findOrderById(orderId);
             if (orderOptional.isPresent()) {
-//                Order order = Order.builder()
-//                        .withId(orderOptional.get().getId())
-//                        .withUser(orderOptional.get().getUser())
-//                        .withProducts(orderOptional.get().getProducts())
-//                        .withDeliveryDate(orderOptional.get().getDeliveryDate())
-//                        .withDeliveryAddress(orderOptional.get().getDeliveryAddress())
-//                        .withCreateDate(orderOptional.get().getCreateDate())
-//                        .withPaymentMethod(orderOptional.get().getPaymentMethod())
-//                        .withOrderStatus(orderStatus)
-//                        .withCost(orderOptional.get().getCost())
-//                        .build();
+                Order order = Order.builder()
+                        .withId(orderOptional.get().getId())
+                        .withPaymentMethod(orderOptional.get().getPaymentMethod())
+                        .withOrderStatus(orderStatus)
+                        .withProducts(orderOptional.get().getProducts())
+                        .withDeliveryDate(orderOptional.get().getDeliveryDate())
+                        .withOrderDate(orderOptional.get().getOrderDate())
+                        .withDeliveryCountry(orderOptional.get().getDeliveryCountry())
+                        .withUser(orderOptional.get().getUser())
+                        .withDeliveryTown(orderOptional.get().getDeliveryTown())
+                        .withOrderCost(orderOptional.get().getOrderCost())
+                        .build();
                 orderService.updateOrder(order);
                 requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_ORDERS.getCommandName());
                 return new ResponseContext(new RestResponseType(), requestMap, new HashMap<>());

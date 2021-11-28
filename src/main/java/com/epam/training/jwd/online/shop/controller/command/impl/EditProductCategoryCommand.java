@@ -5,6 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ProductNameHandler;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
@@ -15,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Handler;
+
 
 public class EditProductCategoryCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCategoryCommand.class);

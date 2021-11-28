@@ -4,6 +4,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.DescriptionHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.ImgFileHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.PriceHandler;
@@ -20,7 +21,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.logging.Handler;
+
 
 
 public class AddProductCommand implements Command, AdminCommand {
@@ -42,8 +43,8 @@ public class AddProductCommand implements Command, AdminCommand {
                 int productTypeId = Integer.parseInt(request.getRequestParameters().get(RequestConstant.TYPE_ID));
                 String productName = request.getRequestParameters().get(RequestConstant.PRODUCT_NAME);
                 String productDescription = request.getRequestParameters().get(RequestConstant.PRODUCT_DESCRIPTION);
-                BigDecimal productPrice = new BigDecimal(request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE));
-                Optional<ProductCategory> productTypeOptional = productCategoryService.findProductTypeById(productTypeId);
+                Double productPrice = new Double(request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE));
+                Optional<ProductCategory> productTypeOptional = productCategoryService.findProductCategoryById(productTypeId);
 
                 if (productTypeOptional.isPresent()) {
                     Product product = Product.builder()
@@ -52,7 +53,7 @@ public class AddProductCommand implements Command, AdminCommand {
                             .withProductCategory(productTypeOptional.get())
                             .withProductDescription(productDescription)
                             .withPrice(productPrice)
-                            .withImgFileName(imgFileName)
+                            .withNameOfImage(imgFileName)
                             .build();
 
                     Optional<String> serverMessage = productService.saveProduct(product);

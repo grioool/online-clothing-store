@@ -5,6 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.NameHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.PhoneNumberHandler;
 import com.epam.training.jwd.online.shop.dao.entity.User;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Handler;
+
 
 public class EditProfileCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(EditProfileCommand.class);

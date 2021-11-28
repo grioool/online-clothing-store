@@ -1,8 +1,8 @@
 package com.epam.training.jwd.online.shop.controller.constants;
 
 public class RequestConstant {
-    public final static String FIRST_NAME = "firstName";
-    public final static String LAST_NAME = "lastName";
+    public final static String FIRST_NAME = "first_name";
+    public final static String LAST_NAME = "last_name";
     public final static String USERNAME = "username";
     public final static String EMAIL = "email";
     public final static String PASSWORD = "password";
@@ -27,7 +27,7 @@ public class RequestConstant {
     public final static String SELECT = "select";
     public final static String PRODUCT_TYPES = "product_types";
     public final static String TYPE_ID = "type_id";
-    public final static String PRODUCT_TYPE = "product_type";
+    public final static String PRODUCT_CATEGORY = "product_category";
     public final static String PRODUCT_PRICE = "product_price";
     public final static String PRODUCT_DESCRIPTION = "product_description";
     public final static String TOTAL_COST = "total_cost";

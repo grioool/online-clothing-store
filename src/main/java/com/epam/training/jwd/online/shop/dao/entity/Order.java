@@ -18,7 +18,7 @@ public class Order extends AbstractEntity<Integer> {
 
     public Order() {}
 
-    public Order(Integer id, PaymentMethod paymentMethod, OrderStatus orderStatus, Map<Product, Integer> products, LocalDateTime orderDate, LocalDateTime deliveryDate, Country deliveryCountry, Town deliveryTown, User user) {
+    public Order(Integer id, PaymentMethod paymentMethod, OrderStatus orderStatus, Map<Product, Integer> products, LocalDateTime orderDate, LocalDateTime deliveryDate, Country deliveryCountry, Town deliveryTown, User user, BigDecimal orderCost) {
         super(id);
         this.paymentMethod = paymentMethod;
         this.orderStatus = orderStatus;
@@ -28,6 +28,7 @@ public class Order extends AbstractEntity<Integer> {
         this.deliveryCountry = deliveryCountry;
         this.deliveryTown = deliveryTown;
         this.user = user;
+        this.orderCost = orderCost;
     }
 
     public PaymentMethod getPaymentMethod() {
@@ -145,6 +146,7 @@ public class Order extends AbstractEntity<Integer> {
         private Country deliveryCountry;
         private Town deliveryTown;
         private User user;
+        private BigDecimal orderCost;
 
         private Builder() {
         }
@@ -194,6 +196,11 @@ public class Order extends AbstractEntity<Integer> {
             return this;
         }
 
+        public Builder withOrderCost(BigDecimal orderCost) {
+            this.orderCost = orderCost;
+            return this;
+        }
+
         public Order build() {
             return new Order(this.id,
                     this.paymentMethod,
@@ -203,7 +210,8 @@ public class Order extends AbstractEntity<Integer> {
                     this.deliveryDate,
                     this.deliveryCountry,
                     this.deliveryTown,
-                    this.user);
+                    this.user,
+                    this.orderCost);
         }
     }
 }

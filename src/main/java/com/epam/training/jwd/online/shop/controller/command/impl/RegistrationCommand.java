@@ -4,6 +4,7 @@ package com.epam.training.jwd.online.shop.controller.command.impl;
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.*;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.entity.UserRole;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Handler;
+
 
 public class RegistrationCommand implements Command {
     private static final Logger logger = LogManager.getLogger(RegistrationCommand.class);

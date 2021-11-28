@@ -30,10 +30,13 @@ public class CreateOrderCommand implements Command, UserCommand {
     @Override
     public ResponseContext execute(RequestContext request) {
         Map<String, Object> requestMap = new HashMap<>();
-//        Map<String, Object> sessionMap = new HashMap<>();
-//        String deliveryDateStr = request.getRequestParameters().get(RequestConstant.DELIVERY_DATE);
-//        String deliveryAddress = request.getRequestParameters().get(RequestConstant.DELIVERY_ADDRESS);
-//        String paymentMethod = request.getRequestParameters().get(RequestConstant.PAYMENT_METHOD);
+        Map<String, Object> sessionMap = new HashMap<>();
+
+        String deliveryDateStr = request.getRequestParameters().get(RequestConstant.DELIVERY_DATE);
+        String deliveryCountry = request.getRequestParameters().get(RequestConstant.DELIVERY_COUNTRY);
+        String deliveryTown = request.getRequestParameters().get(RequestConstant.DELIVERY_TOWN);
+        String paymentMethod = request.getRequestParameters().get(RequestConstant.PAYMENT_METHOD);
+
         UserDto userDto = (UserDto) request.getSessionAttributes().get(RequestConstant.USER);
         Map<Integer, Integer> cart = (Map<Integer, Integer>) request.getSessionAttributes().get(RequestConstant.CART);
 
@@ -50,16 +53,18 @@ public class CreateOrderCommand implements Command, UserCommand {
                 LocalDateTime deliveryDate = LocalDateTime.parse(deliveryDateStr,
                         DateTimeFormatter.ofPattern(RequestConstant.DELIVERY_DATE_PATTERN));
 
-//                Order order = Order.builder()
-//                        .withId(userDto.getId())
-//                        .withOrderStatus(OrderStatus.ACTIVE)
-//                        .withCreateDate(LocalDateTime.now())
-//                        .withPaymentMethod(PaymentMethod.valueOf(paymentMethod))
-//                        .withDeliveryDate(deliveryDate)
-//                        .withDeliveryAddress(deliveryAddress)
-//                        .withProducts(products)
-//                        .withUser(userOptional.get())
-//                        .build();
+                Order order = Order.builder()
+                        .withId(userDto.getId())
+                        .withPaymentMethod(PaymentMethod.valueOf(paymentMethod))
+                        .withOrderStatus(OrderStatus.ACTIVE)
+                        .withProducts(products)
+                        .withDeliveryDate(deliveryDate)
+                        .withOrderDate(LocalDateTime.now())
+                        .withDeliveryCountry(Country.valueOf(deliveryCountry))
+                        .withUser(userOptional.get())
+                        .withDeliveryTown(Town.valueOf(deliveryTown))
+                     //   .withOrderCost()
+                        .build();
 
                 Optional<String> serverMessage = orderService.createOrder(order);
 

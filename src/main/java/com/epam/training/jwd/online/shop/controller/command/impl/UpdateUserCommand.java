@@ -7,7 +7,9 @@ import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.controller.handler.impl.NumberHandler;
 import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.entity.UserRole;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
+import com.epam.training.jwd.online.shop.dao.field.UserField;
 import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,24 +30,23 @@ public class UpdateUserCommand implements Command, AdminCommand {
 
         if (errorMessages.isEmpty()) {
             try {
-                int id = Integer.parseInt(request.getRequestParameters().get(RequestConstant.ID));
-                int loyaltyPoints = Integer.parseInt(request.getRequestParameters().get(RequestConstant.LOYALTY_POINTS));
+                Integer id = Integer.parseInt(request.getRequestParameters().get(RequestConstant.ID));
                 String checkUserBlock = request.getRequestParameters().get(RequestConstant.IS_BLOCKED);
                 boolean isUserBlocked = Boolean.parseBoolean(checkUserBlock);
                 Optional<User> userOptional = userService.findById(id);
 
                 if (userOptional.isPresent()) {
-//                    User user = User.builder()
-//                            .withId(id)
-//                            .withFirstName(userOptional.get().getFirstName())
-//                            .withLastName(userOptional.get().getLastName())
-//                            .withPhoneNumber(userOptional.get().getPhoneNumber())
-//                            .withPassword(userOptional.get().getPassword())
-//                            .withUsername(userOptional.get().getUsername())
-//                            .withRole(userOptional.get().getRole())
-//                            .withEmail(userOptional.get().getEmail())
-//                            .withIsBlocked(isUserBlocked)
-//                            .build();
+                    User user = User.builder()
+                            .withId(id)
+                            .withUsername(userOptional.get().getUsername())
+                            .withFirstName(userOptional.get().getFirstName())
+                            .withLastName(userOptional.get().getLastName())
+                            .withEmail(userOptional.get().getEmail())
+                            .withPassword(userOptional.get().getPassword())
+                            .withRole(userOptional.get().getRole())
+                            .withIsBlocked(isUserBlocked)
+                            .withPhoneNumber(userOptional.get().getPhoneNumber())
+                            .build();
                     userService.updateUser(user);
                     return new ResponseContext(new RestResponseType(), new HashMap<>(), new HashMap<>());
                 } else {
