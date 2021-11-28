@@ -1,13 +1,14 @@
 package com.epam.training.jwd.online.shop.controller;
 
 
-import com.epam.training.jwd.online.shop.controller.command.Command;
-import com.epam.training.jwd.online.shop.controller.command.CommandRequest;
-import com.epam.training.jwd.online.shop.controller.command.CommandResponse;
+import com.epam.training.jwd.online.shop.controller.command.*;
+import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,65 +23,45 @@ public class ApplicationController extends HttpServlet {
     public static final String COMMAND_PARAM_NAME = "command";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        try {
-            process(req, resp);
-        } catch (EntityNotFoundException e) {
-            e.printStackTrace();
-        }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            process(req, resp);
-        } catch (EntityNotFoundException e) {
-            e.printStackTrace();
-        }
+        processRequest(req, resp);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, EntityNotFoundException {
-        System.out.println(this.toString());
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        RequestContext requestContext = new RequestContext(req);
+        String commandName = req.getParameter(RequestConstant.COMMAND);
+        Command command = Command.withName(commandName);
 
-        final String commandName = req.getParameter(COMMAND_PARAM_NAME);
-        final Command command = Command.withName(commandName);
-        final CommandResponse response = command.execute(new CommandRequest() {
-            @Override
-            public HttpSession createSession() {
-                return req.getSession(true);
-            }
+        ResponseContext responseContext = command.execute(requestContext);
+        responseContext.getRequestAttributes().forEach(req::setAttribute);
+        responseContext.getSessionAttributes().forEach(req.getSession()::setAttribute);
 
-            @Override
-            public Optional<HttpSession> getCurrentSession() {
-                return Optional.ofNullable(req.getSession(false));
-            }
-
-            @Override
-            public void invalidateCurrentSession() {
-                final HttpSession session = req.getSession(false);
-                if (session != null) {
-                    session.invalidate();
-                }
-            }
-
-            @Override
-            public String getParameter(String name) {
-                return req.getParameter(name);
-            }
-
-            @Override
-            public void setAttribute(String name, Object value) {
-                req.setAttribute(name, value);
-            }
-        });
-        if (response.isRedirect()) {
-            resp.sendRedirect(response.getPath());
-        } else {
-            final RequestDispatcher dispatcher = req.getRequestDispatcher(response.getPath());
-            dispatcher.forward(req, resp);
+        if (responseContext.getRequestAttributes().containsKey(RequestConstant.LOGOUT)) {
+            req.getSession().invalidate();
+            responseContext.getRequestAttributes().remove(RequestConstant.LOGOUT);
         }
+        chooseResponseType(req, resp, responseContext);
+    }
 
+    private void chooseResponseType(HttpServletRequest req, HttpServletResponse resp, ResponseContext responseContext) throws IOException, ServletException {
+        ResponseType responseType = responseContext.getResponseType();
+
+        switch (responseType.getType()) {
+            case REDIRECT:
+                resp.sendRedirect(req.getContextPath() + ((RedirectResponseType) responseType).getCommand());
+                break;
+            case FORWARD:
+                req.getRequestDispatcher(((ForwardResponseType) responseType).getPage()).forward(req, resp);
+                break;
+            case REST:
+                resp.getWriter().write(new ObjectMapper().writeValueAsString(responseContext.getRequestAttributes()));
+                break;
+        }
     }
 
 }
-

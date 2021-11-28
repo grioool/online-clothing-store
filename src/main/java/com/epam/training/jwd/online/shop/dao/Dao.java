@@ -11,7 +11,7 @@ public interface Dao<T extends AbstractEntity<Integer>> {
 
     T update(T entity) throws DaoException;
 
-    void delete(Integer id) throws DaoException;
+    void delete(T entity) throws DaoException;
 
     List<T> findAll() throws DaoException;
 

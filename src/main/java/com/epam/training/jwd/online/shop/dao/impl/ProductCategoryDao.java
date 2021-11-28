@@ -6,6 +6,7 @@ import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.field.EntityField;
+import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory> {
 
     public static final ProductCategoryDao INSTANCE = new ProductCategoryDao(ConnectionPoolImpl.getInstance());
 
-    private static final String SQL_FIND_ALL = "SELECT product_category.id, category_name, filename_of_image";
+    private static final String SQL_FIND_ALL = "SELECT product_category.id, category_name, filename_of_image FROM product_category";
 
     private static final String SQL_SAVE_PRODUCT_CATEGORY = "INSERT INTO product_category(category_name, filename_of_image)" +
             " VALUES (?, ?)";
@@ -79,5 +80,10 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory> {
                 .withImgFileName(resultSet.getString("filename_of_image"))
                 .build();
         return Optional.of(productCategory);
+    }
+
+    public ProductCategory findByName(String name) throws DaoException {
+        return findByField(name, ProductCategoryField.NAME).stream()
+                .findFirst().orElse(null);
     }
 }

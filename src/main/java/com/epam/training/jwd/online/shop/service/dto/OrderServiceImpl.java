@@ -1,26 +1,101 @@
 package com.epam.training.jwd.online.shop.service.dto;
 
 import com.epam.training.jwd.online.shop.dao.entity.Order;
+import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
+import com.epam.training.jwd.online.shop.dao.field.OrderField;
+import com.epam.training.jwd.online.shop.dao.impl.OrderDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderServiceImpl {
+public class OrderServiceImpl implements OrderService{
+    private final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
+    private static volatile OrderServiceImpl instance;
+    private final UserService userService = UserServiceImpl.getInstance();
+    private final OrderDao orderDao;
 
-    List<Order> findAllOrders() throws ServiceException;
+    private OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
 
-    Optional<String> createOrder(Order order) throws ServiceException;
+    public static OrderServiceImpl getInstance() {
+        OrderServiceImpl localInstance = instance;
+        if (localInstance == null) {
+            synchronized (OrderServiceImpl.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new OrderServiceImpl(OrderDao.INSTANCE);
+                }
+            }
+        }
+        return localInstance;
+    }
 
-    Optional<Order> findOrderById(int orderId) throws ServiceException;
+    public List<Order> findAllOrders() {
+        try {
+            return orderDao.findAll();
+        } catch (DaoException e) {
+            logger.error("Failed to find all orders");
+            throw new ServiceException(e);
+        }
+    }
 
-    List<Order> findAllOrdersByUserId(int userId) throws ServiceException;
+    public Optional<String> createOrder(Order order) {
+        User orderUser = order.getUser();
 
-    void updateOrder(Order order) throws ServiceException;
+        if (orderUser.isBlocked()) {
+            return Optional.of("serverMessage.blockedAccount");
+        }
 
-    void deleteProductFromOrders(int productId) throws ServiceException;
+        try {
+            orderDao.save(order);
+        } catch (DaoException e) {
+            logger.error("Failed to create order");
+            throw new ServiceException(e);
+        }
 
-    void updateUserBalanceAndLoyaltyPoints(Order order) throws ServiceException;
+        return Optional.empty();
+    }
 
+    public Optional<Order> findOrderById(Integer orderId) throws ServiceException {
+        Order order;
+        try {
+            order = orderDao.findById(orderId);
+        } catch (DaoException e) {
+            logger.error("Failed on a order search");
+            throw new ServiceException("Failed search order by id", e);
+        }
+        return order != null ? Optional.of(order) : Optional.empty();
+    }
 
+    public List<Order> findAllOrdersByUserId(Integer userId) {
+        try {
+            return orderDao.findByField(userId, OrderField.USER);
+        } catch (DaoException e) {
+            logger.error("Failed to find all orders by user id = " + userId);
+            throw new ServiceException(e);
+        }
+    }
+
+    public void updateOrder(Order order) {
+        try {
+            orderDao.update(order);
+        } catch (DaoException e) {
+            logger.error("Failed to update order");
+            throw new ServiceException(e);
+        }
+    }
+
+    public void deleteProductFromOrders(Integer productId) throws ServiceException {
+        try {
+            orderDao.deleteOrderProductByProductId(productId);
+        } catch (DaoException e) {
+            logger.error("Failed to delete product from orders");
+            throw new ServiceException(e);
+        }
+    }
 }

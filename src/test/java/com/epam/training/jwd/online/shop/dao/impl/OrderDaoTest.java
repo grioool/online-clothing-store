@@ -3,77 +3,54 @@ package com.epam.training.jwd.online.shop.dao.impl;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.*;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
-import com.epam.training.jwd.online.shop.dao.field.OrderField;
-import com.epam.training.jwd.online.shop.dao.field.UserField;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.accessibility.AccessibleStateSet;
+
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderDaoTest {
+    private static final String TEST_ORDER_USERNAME = "griol";
     private static OrderDao orderDao;
-    private static Order.Builder order;
-    private static List<Order> orders;
+    private static Order.Builder orderBuilder;
+    private static User user;
 
     @BeforeAll
-    public static void beforeAll() {
+    public static void beforeAll() throws DaoException {
         ConnectionPoolImpl.getInstance().init();
-        orderDao = OrderDao.INSTANCE;
-        Product shoes = new Product();
         Map<Product, Integer> products = new HashMap<>();
-        products.put(shoes, 32);
-        User user = new User();
-        user = User.builder()
-                .withId(3)
-                .withUsername("grioooddoool")
-                .withPassword("888")
-                .withFirstName("Olga")
-                .withLastName("Grigorieva")
-                .withEmail("kksk")
-                .withIsBlocked(false)
-                .withPhoneNumber("333")
-                .withRole(UserRole.USER)
-                .build();
-        order = Order.builder()
-                .withId(2)
-                .withPaymentMethod(PaymentMethod.CARD)
+        products.put(ProductDao.INSTANCE.findByProductName("black_oe"), 41);
+        orderDao = OrderDao.INSTANCE;
+        user = UserDao.INSTANCE.findByUsername(TEST_ORDER_USERNAME);
+        orderBuilder = Order.builder()
+                .withOrderDate(LocalDateTime.ofEpochSecond(new Date().getTime(), 100, ZoneOffset.MAX))
                 .withOrderStatus(OrderStatus.ACTIVE)
-                .withProducts(products)
-                .withDeliveryDate(LocalDateTime.now())
-                .withOrderDate(LocalDateTime.now())
                 .withDeliveryCountry(Country.BELARUS)
+                .withDeliveryDate(LocalDateTime.ofEpochSecond(new Date().getTime(), 100, ZoneOffset.MAX))
+                .withPaymentMethod(PaymentMethod.CARD)
+                .withDeliveryTown(Town.MINSK)
                 .withUser(user)
-                .withDeliveryTown(Town.MINSK);
-
+                .withProducts(products);
     }
 
     @Test
-    void save() throws DaoException {
-        orderDao.save(order.build());
-        orders = orderDao.findByField("2", OrderField.ID);
-        order.withId(orders.get(0).getId());
-        assertTrue(orders.contains(order.build()));
+    void crudTest() throws DaoException {
+        Order order = orderBuilder.build();
+        orderDao.save(order);
+        assertNotNull(user.getId());
+        assertNotNull(orderDao.findByUser(user));
+        assertTrue(orderDao.findById(order.getId()).getProducts().size() > 0);
+        order.setOrderStatus(OrderStatus.COMPLETED);
+        orderDao.update(order);
+        assertEquals(OrderStatus.COMPLETED, orderDao.findById(order.getId()).getOrderStatus());
+        orderDao.delete(order);
+        assertNull(orderDao.findById(order.getId()));
     }
-
-    @Test
-    void update() throws DaoException {
-        order.withId(2);
-        orderDao.update(order.build());
-        orders = orderDao.findByField("2", OrderField.ID);
-        order.withId(orders.get(0).getId());
-        assertTrue(orders.contains(order.build()));
-    }
-
-    @Test
-    void delete() throws DaoException {
-        orders = orderDao.findByField("2", OrderField.ID);
-        orderDao.delete(orders.get(0).getId());
-        assertTrue(orders.contains(order.build()));
-    }
-
 }

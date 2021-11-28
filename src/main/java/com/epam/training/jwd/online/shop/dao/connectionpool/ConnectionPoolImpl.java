@@ -88,7 +88,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
 
     @Override
     public synchronized void returnConnection(Connection connection) {
-        if(givenAwayConnections.remove(connection)) {
+        if(givenAwayConnections.remove((ProxyConnection) connection)) {
             availableConnections.add((ProxyConnection) connection);
             this.notifyAll();
         } else {

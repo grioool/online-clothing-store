@@ -17,60 +17,36 @@ class ProductDaoTest {
     private static ProductCategory productCategory;
     private static ProductCategoryDao productCategoryDao;
     private static ProductDao productDao;
-    private static Product.Builder product;
-    private static List<Product> products;
+    private static Product.Builder productBuilder;
+    private static final String TEST_PRODUCT_PRODUCT_NAME = "black_shoes";
 
     @BeforeAll
     public static void beforeAll() throws DaoException {
         ConnectionPoolImpl.getInstance().init();
-        productCategory = ProductCategory.builder()
-                .withCategoryName("Shoes")
-                .withImgFileName("shoes.png")
-                .build();
         productDao = ProductDao.INSTANCE;
         productCategoryDao = ProductCategoryDao.INSTANCE;
-        product = Product.builder()
+        productBuilder = Product.builder()
                 .withProductName("black_shoes")
                 .withPrice(33.3)
                 .withBrand(Brand.GRIOOOL)
-                .withProductCategory(productCategory)
+                .withProductCategory(productCategoryDao.findByName("Shoes"))
                 .withNameOfImage("blackShoesFile")
                 .withProductDescription("Black shoes")
                 .withArticle(299299);
     }
 
     @Test
-    void save() throws DaoException {
-     //   productCategoryDao.save(productCategory);
-      //  product.withProductCategory(productCategoryDao.getByName("Shoes"));
-        productDao.save(product.build());
-        products = productDao.findByField("black_shoes", ProductField.NAME);
-        product.withId(products.get(0).getId());
-        assertTrue(products.contains(product.build()));
+    void crudTest() throws DaoException {
+        Product product = productBuilder.build();
+        productDao.save(product);
+        assertNotNull(product.getId());
+        assertNotNull(productDao.findByProductName(TEST_PRODUCT_PRODUCT_NAME));
+        product.setBrand(Brand.GRIOOOL);
+        productDao.update(product);
+        assertEquals(Brand.GRIOOOL, productDao.findByProductName(TEST_PRODUCT_PRODUCT_NAME).getBrand());
+        productDao.delete(product);
+        assertNull(productDao.findByProductName(TEST_PRODUCT_PRODUCT_NAME));
     }
 
-    @Test
-    void update() throws DaoException {
-        product.withProductName("black_shoes");
-        productDao.update(product.build());
-        products = productDao.findByField("black_shoes", ProductField.NAME);
-        assertTrue(products.contains(product.build()));
-    }
-
-    @Test
-    void delete() throws DaoException {
-        productDao.delete(products.get(0).getId());
-        products = productDao.findByField("black_shoes", ProductField.NAME);
-        assertFalse(products.contains(product.build()));
-    }
-
-
-    @Test
-    void findProductsInOrder() {
-    }
-
-    @Test
-    void findProductCategoryById() {
-    }
 
 }

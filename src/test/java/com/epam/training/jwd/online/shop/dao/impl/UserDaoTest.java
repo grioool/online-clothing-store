@@ -14,17 +14,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserDaoTest {
 
+    private static final String TEST_USER_USERNAME = "grioooddoool";
     private static UserDao userDao;
-    private static User.Builder user;
-    private static List<User> users;
+    private static User.Builder userBuilder;
 
     @BeforeAll
     public static void beforeAll() {
         ConnectionPoolImpl.getInstance().init();
         userDao = UserDao.INSTANCE;
-        user = User.builder()
-                .withId(2)
-                .withUsername("grioooddoool")
+        userBuilder = User.builder()
+                .withUsername(TEST_USER_USERNAME)
                 .withPassword("888")
                 .withFirstName("Olga")
                 .withLastName("Grigorieva")
@@ -35,30 +34,15 @@ class UserDaoTest {
     }
 
     @Test
-    void save() throws DaoException {
-        userDao.save(user.build());
-        users = userDao.findByField("grioooddoool", UserField.USERNAME);
-        user.withId(users.get(0).getId());
-        assertTrue(users.contains(user.build()));
-    }
-
-    @Test
-    void update() throws DaoException {
-        user.withUsername("grioooddoool");
-        userDao.update(user.build());
-        users = userDao.findByField("grioooddoool", UserField.USERNAME);
-        user.withId(users.get(0).getId());
-        assertTrue(users.contains(user.build()));
-    }
-
-    @Test
-    void delete() throws DaoException {
-        users = userDao.findByField("grioooddoool", UserField.USERNAME);
-        userDao.delete(users.get(0).getId());
-        assertTrue(users.contains(user.build()));
-    }
-
-    @Test
-    void findUserById() {
+    void crudTest() throws DaoException {
+        User user = userBuilder.build();
+        userDao.save(user);
+        assertNotNull(user.getId());
+        assertNotNull(userDao.findByUsername(TEST_USER_USERNAME));
+        user.setFirstName("Vasya");
+        userDao.update(user);
+        assertEquals("Vasya", userDao.findByUsername(TEST_USER_USERNAME).getFirstName());
+        userDao.delete(user);
+        assertNull(userDao.findByUsername(TEST_USER_USERNAME));
     }
 }

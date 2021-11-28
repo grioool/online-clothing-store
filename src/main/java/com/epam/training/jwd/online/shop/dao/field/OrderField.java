@@ -11,15 +11,14 @@ public enum OrderField implements EntityField<Order> {
     ORDER_DATE("order_date"),
     COUNTRY("delivery_country_id"),
     USER("user_id"),
-    TOWN("delivery_town_id");
+    TOWN("delivery_town_id"),
+    ORDER_COST("order_cost");
 
-    private String query;
+    private final String query;
 
     OrderField(String query) {
         this.query = query;
     }
-
-    OrderField() {}
 
     public String getField() {
         return query;

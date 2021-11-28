@@ -32,12 +32,12 @@ public class ProductDao extends AbstractDao<Product> {
             " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_UPDATE_PRODUCT = "UPDATE product SET product_name = ?, price = ?, brand_id = ?, category_id = ?," +
-            "name_of_img = ?, product_description = ?, article = ? WHERE id = ?";
+            "name_of_image = ?, product_description = ?, article = ? WHERE id = ?";
 
     private static final String SQL_DELETE_PRODUCT = "DELETE FROM product WHERE id = ?";
 
-    private static final String SQL_FIND_BY_ORDER_ID = "SELECT id, product_name, price, img_name, product_description, " +
-            "type_id, amount FROM product INNER JOIN order_product as op on product.id = op.product_id " +
+    private static final String SQL_FIND_BY_ORDER_ID = "SELECT id, product_name, price, name_of_image, product_description, " +
+            "category_id, article, brand_id FROM product INNER JOIN product_in_order as op on product.id = op.product_id " +
             "WHERE op.order_id = ?";
 
     private final ConnectionPool pool = ConnectionPoolImpl.getInstance();
@@ -96,7 +96,7 @@ public class ProductDao extends AbstractDao<Product> {
                 .withProductName(resultSet.getString(ProductField.NAME.getField()))
                 .withPrice(resultSet.getDouble(ProductField.PRICE.getField()))
                 .withBrand(Brand.getById(resultSet.getInt(ProductField.BRAND.getField())))
-                .withProductCategory(findProductCategoryById(resultSet.getInt(ProductField.CATEGORY.getField())))
+                .withProductCategory(ProductCategoryDao.INSTANCE.findById(resultSet.getInt(ProductField.CATEGORY.getField())))
                 .withNameOfImage(resultSet.getString(ProductField.NAME_OF_IMAGE.getField()))
                 .withProductDescription(resultSet.getString(ProductField.DESCRIPTION.getField()))
                 .withArticle(resultSet.getInt(ProductField.ARTICLE.getField()))
@@ -104,20 +104,11 @@ public class ProductDao extends AbstractDao<Product> {
         return Optional.of(product);
     }
 
-    protected ProductCategory findProductCategoryById(Integer id) throws DaoException {
-        List<ProductCategory> productTypeList = ProductCategoryDao.INSTANCE.findByField(String.valueOf(id), ProductCategoryField.ID);
-        if (productTypeList.size() < 1) {
-            logger.warn("Failed to load product category.");
-            throw new DaoException("Failed to load product type");
-        }
-        return productTypeList.get(0);
-    }
-
-    protected Map<Product, Integer> findProductsInOrder(Integer id) throws DaoException {
+    protected Map<Product, Integer> findProductsInOrder(Integer orderId) throws DaoException {
         Map<Product, Integer> products = new HashMap<>();
         try (Connection connection = connectionPool.takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ORDER_ID)) {
-                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(1, orderId);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     Optional<Product> productOptional = parseResultSet(resultSet);
@@ -130,5 +121,9 @@ public class ProductDao extends AbstractDao<Product> {
             throw new DaoException("Failed to find products in order by id.");
         }
         return products;
+    }
+
+    public Product findByProductName(String name) throws DaoException {
+        return this.findByField(name, ProductField.NAME).stream().findFirst().orElse(null);
     }
 }

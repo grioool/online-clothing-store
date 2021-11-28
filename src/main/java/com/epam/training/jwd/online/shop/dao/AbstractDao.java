@@ -3,15 +3,15 @@ package com.epam.training.jwd.online.shop.dao;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPool;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.AbstractEntity;
+import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
+import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.field.EntityField;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements Dao<T> {
@@ -38,10 +38,9 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
     protected abstract void prepareAllStatement(PreparedStatement preparedStatement, final T entity) throws SQLException;
 
     @Override
-    public void save(final T entity) throws DaoException {
-        try {
-            Connection connection = connectionPool.takeConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(getSaveSql());
+    public void save(final T entity) {
+        try(Connection connection = connectionPool.takeConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(getSaveSql(), Statement.RETURN_GENERATED_KEYS);
             prepareAllStatement(preparedStatement, entity);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -49,38 +48,37 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
                 entity.setId(resultSet.getInt(1));
             }
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
-            throw new DaoException("Failed to create entity", e);
+            throw new DaoException(e);
         }
     }
 
     @Override
-    public T update(final T entity) throws DaoException {
+    public T update(final T entity) {
         try (Connection connection = connectionPool.takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(getUpdateSql())) {
                 prepareUpdateStatement(preparedStatement, entity);
                 preparedStatement.execute();
             }
         } catch (SQLException | InterruptedException e) {
-            throw new DaoException("Failed to update entity", e);
+            throw new DaoException(e);
         }
         return entity;
     }
 
     @Override
-    public void delete(Integer id) throws DaoException {
+    public void delete(T entity) {
         try (Connection connection = connectionPool.takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(getDeleteSql())) {
-                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(1, entity.getId());
                 preparedStatement.execute();
             }
         } catch (SQLException | InterruptedException e) {
-            throw new DaoException("Failed to delete entity with id = " + id, e);
+            throw new DaoException(e);
         }
     }
 
     @Override
-    public List<T> findAll() throws DaoException {
+    public List<T> findAll() {
         List<T> entitiesList = new ArrayList<>();
         try (Connection connection = connectionPool.takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(getFindAllSql())) {
@@ -91,12 +89,12 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
                 }
             }
         } catch (SQLException | InterruptedException e) {
-            throw new DaoException("Failed to find all entities", e);
+            throw new DaoException(e);
         }
         return entitiesList;
     }
 
-    public List<T> findByField(String searchableField, EntityField<T> fieldName) throws DaoException {
+    public List<T> findByField(String searchableField, EntityField<T> fieldName) {
         List<T> list = new ArrayList<>();
         try (Connection connection = ConnectionPoolImpl.getInstance().takeConnection()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(getFindAllSql() + " WHERE " + fieldName.getField() + " = ?")) {
@@ -108,13 +106,39 @@ public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements 
                 }
             }
         } catch (SQLException | InterruptedException e) {
-            e.printStackTrace();
-            throw new DaoException("Failed to find by " + fieldName.toString().toLowerCase());
+            throw new DaoException(e);
         }
         return list;
     }
 
-    public static void main(String[] args) throws DaoException {
+    public List<T> findByField(Integer searchableField, EntityField<T> fieldName) {
+        List<T> list = new ArrayList<>();
+        try (Connection connection = ConnectionPoolImpl.getInstance().takeConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(getFindAllSql() + " WHERE " + fieldName.getField() + " = ?")) {
+                preparedStatement.setInt(1, searchableField);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Optional<T> optionalT = parseResultSet(resultSet);
+                    optionalT.ifPresent(list::add);
+                }
+            }
+        } catch (SQLException | InterruptedException e) {
+            throw new DaoException(e);
+        }
+        return list;
+    }
+
+    public T findById(Integer id) {
+        try (Connection connection = ConnectionPoolImpl.getInstance().takeConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(getFindAllSql() + " WHERE id = ?")) {
+                preparedStatement.setInt(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()) return parseResultSet(resultSet).orElse(null);
+            }
+        } catch (SQLException | InterruptedException e) {
+            throw new DaoException(e);
+        }
+        return null;
     }
 }
 

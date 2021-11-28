@@ -22,9 +22,8 @@ public class UserDao extends AbstractDao<User> {
 
     private final Logger logger = LogManager.getLogger(UserDao.class);
 
-    private static final String SQL_FIND_ALL = "SELECT \"user\".id, username, password, first_name, last_name," +
-            " email, is_blocked, phone_number, role_id FROM \"user\"" +
-            " INNER JOIN user_role ON \"user_role\".id = \"user\".role_id";
+    private static final String SQL_FIND_ALL = "SELECT id, username, password, first_name, last_name," +
+            " email, is_blocked, phone_number, role_id FROM \"user\"";
 
     private static final String SQL_SAVE_USER = "INSERT INTO \"user\"(username, password, first_name, last_name," +
             " email, is_blocked, phone_number, role_id)" +
@@ -98,14 +97,8 @@ public class UserDao extends AbstractDao<User> {
         return Optional.of(user);
     }
 
-
-    public User findUserById(int id) throws DaoException {
-        List<User> users = UserDao.INSTANCE.findByField(String.valueOf(id), UserField.ID);
-        if (users.size() < 1) {
-           logger.error("Failed to load user.");
-            throw new DaoException("Failed to load user.");
-        }
-        return users.get(0);
+    public User findByUsername(String username) throws DaoException {
+       return this.findByField(username, UserField.USERNAME).stream().findFirst().orElse(null);
     }
 }
 

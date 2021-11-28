@@ -4,11 +4,11 @@ import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
 
 public interface Command {
 
-    CommandResponse execute(CommandRequest request) throws EntityNotFoundException;
 
-    static Command withName(String name) {
-        return ApplicationCommand.of(name)
-                .getCommand();
+    ResponseContext execute(RequestContext request);
+
+    static Command withName(String name){
+        return CommandManager.of(name);
     }
 
 }

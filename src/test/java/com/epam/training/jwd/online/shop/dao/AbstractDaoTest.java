@@ -64,17 +64,9 @@ class AbstractDaoTest {
 
     @Test
     void delete() throws DaoException {
-        productDao.delete(products.get(0).getId());
+        productDao.delete(products.get(0));
         products = productDao.findByField("updateName", ProductField.NAME);
         assertFalse(products.contains(product.build()));
-    }
-
-    @Test
-    void findAll() {
-    }
-
-    @Test
-    void findByField() {
     }
 
     @AfterAll

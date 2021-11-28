@@ -1,6 +1,6 @@
 package com.epam.training.jwd.online.shop.dao.exception;
 
-public class DaoException extends Exception {
+public class DaoException extends RuntimeException {
     public DaoException(String message) {
         super(message);
     }
