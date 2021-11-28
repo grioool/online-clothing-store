@@ -13,21 +13,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <junit.version>5.7.0</junit.version>
-        <assertj.version>3.19.0</assertj.version>
-        <mockito.version>3.7.7</mockito.version>
+        <junit.version>5.8.1</junit.version>
+        <assertj.version>3.21.0</assertj.version>
+        <mockito.version>4.0.0</mockito.version>
         <postgresql.version>42.3.1</postgresql.version>
         <servlet-api.version>4.0.1</servlet-api.version>
-        <jsp-api.version>2.3.1</jsp-api.version>
-        <jstl.version>1.2</jstl.version>
-        <taglibs.version>1.1.0</taglibs.version>
+        <jsp-api.version>2.3.3</jsp-api.version>
+        <jstl.version>1.2-rev-1</jstl.version>
+        <taglibs.version>1.1.2</taglibs.version>
         <javax-mail.version>1.6.2</javax-mail.version>
-        <jackson.version>2.11.1</jackson.version>
-        <lombok.version>1.18.20</lombok.version>
+        <jackson.version>2.13.0</jackson.version>
+        <lombok.version>1.18.22</lombok.version>
         <scrypt.version>1.4.0</scrypt.version>
         <log4j2.version>2.14.1</log4j2.version>
-        <slf4j.version>1.7.30</slf4j.version>
-        <common-lang3.version>3.11</common-lang3.version>
+        <slf4j.version>1.7.32</slf4j.version>
+        <common-lang3.version>3.12.0</common-lang3.version>
         <at.favre.lib>0.9.0</at.favre.lib>
     </properties>
 
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
+            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
@@ -103,17 +103,10 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.lambdaworks</groupId>
             <artifactId>scrypt</artifactId>
             <version>${scrypt.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -142,7 +135,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>RELEASE</version>
+            <version>22.0.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
