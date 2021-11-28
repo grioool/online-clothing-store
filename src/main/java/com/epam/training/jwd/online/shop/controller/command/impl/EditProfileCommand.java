@@ -9,6 +9,7 @@ import com.epam.training.jwd.online.shop.controller.handler.Handler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.NameHandler;
 import com.epam.training.jwd.online.shop.controller.handler.impl.PhoneNumberHandler;
 import com.epam.training.jwd.online.shop.dao.entity.User;
+import com.epam.training.jwd.online.shop.dao.entity.UserRole;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.UserDto;
 import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
@@ -38,16 +39,17 @@ public class EditProfileCommand implements Command, UserCommand {
 
                 if (userOptional.isPresent()) {
 
-//                    User user = User.builder()
-//                            .withId(userDto.getId())
-//                            .withFirstName(request.getRequestParameters().get(RequestConstant.FIRST_NAME))
-//                            .withLastName(request.getRequestParameters().get(RequestConstant.LAST_NAME))
-//                            .withPhoneNumber(request.getRequestParameters().get(RequestConstant.PHONE_NUMBER))
-//                            .withPassword(userOptional.get().getPassword())
-//                            .withUsername(userOptional.get().getUsername())
-//                            .withRole(userOptional.get().getRole())
-//                            .withEmail(userOptional.get().getEmail())
-//                            .build();
+                    User user = User.builder()
+                            .withId(userDto.getId())
+                            .withUsername(userOptional.get().getUsername())
+                            .withFirstName(request.getRequestParameters().get(RequestConstant.FIRST_NAME))
+                            .withLastName(request.getRequestParameters().get(RequestConstant.LAST_NAME))
+                            .withEmail(userOptional.get().getEmail())
+                            .withPassword(userOptional.get().getPassword())
+                            .withRole(userOptional.get().getRole())
+                            .withIsBlocked(false)
+                            .withPhoneNumber(request.getRequestParameters().get(RequestConstant.PHONE_NUMBER))
+                            .build();
 
                     userService.updateUser(user);
 

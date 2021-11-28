@@ -12,6 +12,7 @@ import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.util.PaginationContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +40,7 @@ public class ToMenuItemCommand implements Command {
                 PaginationContext<Product> paginationContext = new PaginationContext<>(products, page);
 
                 requestMap.put(RequestConstant.PAGINATION_CONTEXT, paginationContext);
-                requestMap.put(RequestConstant.PRODUCT_TYPE, productTypeOptional.get());
+                requestMap.put(RequestConstant.PRODUCT_CATEGORY, productCategoryOptional.get());
 
                 responseContext = new ResponseContext(new ForwardResponseType(PageConstant.PRODUCTS_PAGE), requestMap, new HashMap<>());
             } else {

@@ -5,6 +5,7 @@ import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 import com.epam.training.jwd.online.shop.dao.impl.ProductCategoryDao;
+import com.epam.training.jwd.online.shop.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -80,7 +81,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
                         .build();
 
                 updateProductCategory(editedProductType);
-               // IOUtil.deleteData(productCategory.getImgFilename());
+                IOUtil.deleteData(productCategory.getImgFilename());
             } else {
                 return Optional.of("serverMessage.productTypeNotFound");
             }

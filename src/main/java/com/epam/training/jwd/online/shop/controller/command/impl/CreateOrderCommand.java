@@ -11,6 +11,7 @@ import com.epam.training.jwd.online.shop.service.dto.OrderServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.UserDto;
 import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
+import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

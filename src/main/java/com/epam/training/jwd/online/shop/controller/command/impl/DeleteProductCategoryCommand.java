@@ -9,9 +9,9 @@ import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.nio.ch.IOUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +25,12 @@ public class DeleteProductCategoryCommand implements Command, AdminCommand {
     public ResponseContext execute(RequestContext request) {
         try {
             int typeId = Integer.parseInt(request.getRequestParameters().get(RequestConstant.ID));
-            Optional<ProductCategory> productTypeOptional = productCategoryService.findProductTypeById(typeId);
+            Optional<ProductCategory> productTypeOptional = productCategoryService.findProductCategoryById(typeId);
             if (productTypeOptional.isPresent()) {
                 ProductCategory productCategory = productTypeOptional.get();
                 ProductServiceImpl.getInstance().deleteAllProductsByCategoryId(productCategory.getId());
                 productCategoryService.deleteProductCategory(productCategory);
-             //   IOUtil.deleteData(productCategory.getImgFilename());
+                IOUtil.deleteData(productCategory.getImgFilename());
 
                 Map<String, Object> requestMap = new HashMap<>();
                 requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU.getCommandName());

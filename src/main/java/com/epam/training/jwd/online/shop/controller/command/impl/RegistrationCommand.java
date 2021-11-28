@@ -9,7 +9,9 @@ import com.epam.training.jwd.online.shop.controller.handler.impl.*;
 import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.entity.UserRole;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
+import com.epam.training.jwd.online.shop.dao.field.UserField;
 import com.epam.training.jwd.online.shop.service.dto.UserServiceImpl;
+import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,17 +43,17 @@ public class RegistrationCommand implements Command {
             String email = request.getRequestParameters().get(RequestConstant.EMAIL);
             String phoneNumber = request.getRequestParameters().get(RequestConstant.PHONE_NUMBER);
             String password = request.getRequestParameters().get(RequestConstant.PASSWORD);
-//
-//            User user = User.builder()
-//                    .withFirstName(firstName)
-//                    .withLastName(lastName)
-//                    .withUsername(username)
-//                    .withEmail(email)
-//                    .withPhoneNumber(phoneNumber)
-//                    .withPassword(PasswordEncoder.encryptPassword(password))
-//                    .withRole(UserRole.USER)
-//                    .withIsBlocked(false)
-//                    .build();
+
+            User user = User.builder()
+                    .withUsername(username)
+                    .withFirstName(firstName)
+                    .withLastName(lastName)
+                    .withEmail(email)
+                    .withPassword(PasswordEncoder.encryptPassword(password))
+                    .withRole(UserRole.USER)
+                    .withIsBlocked(false)
+                    .withPhoneNumber(phoneNumber)
+                    .build();
             try {
                 Optional<String> serverMessage = userService.registerUser(user);
                 Map<String, Object> requestMap = new HashMap<>();

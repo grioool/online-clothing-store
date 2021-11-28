@@ -5,6 +5,7 @@ import com.epam.training.jwd.online.shop.controller.command.RequestContext;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
 import com.epam.training.jwd.online.shop.controller.handler.Handler;
+import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,17 +22,17 @@ public class PhoneNumberHandler extends AbstractHandler {
 
     @Override
     public Set<String> handleRequest(RequestContext requestContext) {
-        Set<String> error_messages = new HashSet<>();
+        Set<String> errorMessages = new HashSet<>();
         String phoneNumber = requestContext.getRequestParameters().get(RequestConstant.PHONE_NUMBER);
 
         if (StringUtils.isNullOrEmpty(phoneNumber) || !phoneNumber.matches(PHONE_NUMBER_PATTERN)) {
-            error_messages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.phoneNumber"));
+            errorMessages.add(LocalizationMessage.localize(requestContext.getLocale(), "serverMessage.phoneNumber"));
         }
 
         if (nextHandler != null) {
-            error_messages.addAll(nextHandler.handleRequest(requestContext));
+            errorMessages.addAll(nextHandler.handleRequest(requestContext));
         }
 
-        return error_messages;
+        return errorMessages;
     }
 }

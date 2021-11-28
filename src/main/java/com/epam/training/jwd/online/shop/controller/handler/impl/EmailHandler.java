@@ -1,12 +1,10 @@
 package com.epam.training.jwd.online.shop.controller.handler.impl;
 
-import com.epam.jwd.cafe.command.RequestContext;
-import com.epam.jwd.cafe.command.constant.RequestConstant;
-import com.epam.jwd.cafe.handler.AbstractHandler;
-import com.epam.jwd.cafe.handler.Handler;
-import com.epam.jwd.cafe.util.LocalizationMessage;
-import com.mysql.cj.util.StringUtils;
-
+import com.epam.training.jwd.online.shop.controller.command.RequestContext;
+import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
+import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
+import com.epam.training.jwd.online.shop.controller.handler.Handler;
+import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import java.util.HashSet;
 import java.util.Set;
 

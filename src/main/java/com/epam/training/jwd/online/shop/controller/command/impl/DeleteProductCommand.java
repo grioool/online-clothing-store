@@ -9,9 +9,9 @@ import com.epam.training.jwd.online.shop.dao.entity.Product;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import com.epam.training.jwd.online.shop.service.dto.OrderServiceImpl;
 import com.epam.training.jwd.online.shop.service.dto.ProductServiceImpl;
+import com.epam.training.jwd.online.shop.util.IOUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.nio.ch.IOUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class DeleteProductCommand implements Command, AdminCommand {
                 orderService.deleteProductFromOrders(productId);
                 Product product = productOptional.get();
                 productService.deleteProduct(product);
-              //  IOUtil.deleteData(product.getImgFileName());
+                IOUtil.deleteData(product.getNameOfImage());
 
                 Map<String, Object> requestMap = new HashMap<>();
                 requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU_ITEM.getCommandName());

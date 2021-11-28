@@ -7,6 +7,7 @@ import com.epam.jwd.cafe.util.LocalizationMessage;
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
 import com.epam.training.jwd.online.shop.controller.handler.AbstractHandler;
 import com.epam.training.jwd.online.shop.controller.handler.Handler;
+import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 
 import java.util.HashSet;
 import java.util.Set;
