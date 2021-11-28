@@ -27,7 +27,7 @@ public class ToMenuCommand implements Command {
         try {
             List<ProductCategory> productCategories = ProductCategoryServiceImpl.getInstance().findAllProductCategories();
             requestMap.put(RequestConstant.PRODUCT_CATEGORIES, productCategories);
-            responseContext = new ResponseContext(new ForwardResponseType(PageConstant.MENU_PAGE), requestMap, new HashMap<>());
+            responseContext = new ResponseContext(new ForwardResponseType(PageConstant.CATALOG_PAGE), requestMap, new HashMap<>());
         } catch (ServiceException e) {
             logger.error("Failed to find all product types", e);
             responseContext = new ResponseContext(new ForwardResponseType(PageConstant.ERROR_PAGE));

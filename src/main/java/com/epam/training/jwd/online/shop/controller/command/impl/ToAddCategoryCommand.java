@@ -14,6 +14,6 @@ public class ToAddCategoryCommand implements Command, AdminCommand {
 
     @Override
     public ResponseContext execute(RequestContext request) {
-        return new ResponseContext(new ForwardResponseType(PageConstant.ADD_TYPE_PRODUCT), new HashMap<>(), new HashMap<>());
+        return new ResponseContext(new ForwardResponseType(PageConstant.ADD_CATEGORY_PRODUCT), new HashMap<>(), new HashMap<>());
     }
 }
