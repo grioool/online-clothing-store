@@ -5,16 +5,18 @@ import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPool;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
-import com.epam.training.jwd.online.shop.dao.field.EntityField;
 import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+
+/**
+ * The class provide CRUD operations for {@link ProductCategory}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ProductCategoryDao extends AbstractDao<ProductCategory> {
 

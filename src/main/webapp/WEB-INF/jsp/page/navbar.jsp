@@ -34,7 +34,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="<c:url value='/controller?command=to_menu'/>"><fmt:message key="link.menu"/></a>
+                       href="<c:url value='/controller?command=to_catalog'/>"><fmt:message key="link.menu"/></a>
                 </li>
 
                 <c:if test="${isAuthorized}">
@@ -46,11 +46,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<c:url value="/controller?command=to_my_orders&page=1"/>">
                             <fmt:message key="link.myOrders"/></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<c:url value="/controller?command=to_review&page=1"/>">
-                            <fmt:message key="link.review"/></a>
                     </li>
 
                     <c:if test="${isAdmin}">

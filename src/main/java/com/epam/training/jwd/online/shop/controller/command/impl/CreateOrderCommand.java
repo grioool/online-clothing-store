@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
@@ -20,6 +19,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+/**
+ * The class provides create new {@link Order}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class CreateOrderCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(CreateOrderCommand.class);

@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.ForwardResponseType;
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
@@ -16,6 +15,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/**
+ * The class provides moving to catalog page
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ToCatalogCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ToCatalogCommand.class);

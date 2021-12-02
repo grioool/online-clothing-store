@@ -3,16 +3,19 @@ package com.epam.training.jwd.online.shop.dao;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPool;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.AbstractEntity;
-import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
-import com.epam.training.jwd.online.shop.dao.entity.User;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
 import com.epam.training.jwd.online.shop.dao.field.EntityField;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+
+/**
+ * Class provide common CRUD operations for entities
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public abstract class AbstractDao<T extends AbstractEntity<Integer>> implements Dao<T> {
     protected final ConnectionPool connectionPool;

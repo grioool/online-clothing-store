@@ -11,9 +11,14 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.sql.SQLException;
 
+/**
+ * The class provide initialization {@link ConnectionPool} on application start up
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 @WebListener
 public class ApplicationListener implements ServletContextListener {
-    private final Logger LOGGER = LogManager.getLogger(ApplicationListener.class);
     private ConnectionPool connectionPool;
 
     @Override

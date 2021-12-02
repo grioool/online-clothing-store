@@ -13,6 +13,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The class provides a business logics withName {@link ProductCategory}.
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
@@ -37,6 +42,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     private ProductCategoryServiceImpl(ProductCategoryDao instance) {
     }
 
+    /**
+     * Find all product types in database
+     *
+     * @return {@link List<ProductCategory>}
+     */
+
     public List<ProductCategory> findAllProductCategories() {
         try {
             return productCategoryDao.findAll();
@@ -46,6 +57,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }
     }
 
+    /**
+     * Find product type by id in the database.
+     *
+     * @param id id withName the product type to be found
+     * @return {@link Optional<ProductCategory>}
+     * Empty optional - if the product type if not found
+     */
+
     public Optional<ProductCategory> findProductCategoryById(Integer id) {
         return findProductCategoryByUniqueField(String.valueOf(id), ProductCategoryField.ID);
     }
@@ -53,6 +72,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public Optional<ProductCategory> findProductCategoryByName(String productTypeName) {
         return findProductCategoryByUniqueField(productTypeName, ProductCategoryField.NAME);
     }
+
+    /**
+     * Create new product category
+     *
+     * @param productCategory product category object to add to the database
+     * @return {@link Optional<String>} - server message, if the product category name is already exist
+     */
 
     public Optional<String> saveProductCategory(ProductCategory productCategory) {
         try {
@@ -66,6 +92,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }
         return Optional.of("serverMessage.productTypeNameAlreadyTaken");
     }
+
+    /**
+     * Edit product category in the database.
+     *
+     * @param id             the id withName product category in database
+     * @param newFileName    the new file name
+     * @param newProductName the new product category name
+     * @return {@link Optional<String>} - server message, if product category name is already exist<br> or product category is not found
+     */
 
     public Optional<String> editProductCategory(Integer id, String newFileName, String newProductName) {
         Optional<ProductCategory> productTypeOptional = findProductCategoryById(id);
@@ -88,6 +123,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }
         return Optional.empty();
     }
+
+    /**
+     * Delete product category in database by id.
+     *
+     * @param productCategory withName the product category object to be deleted
+     */
 
     public void deleteProductCategory(ProductCategory productCategory) {
         try {

@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
@@ -16,6 +15,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+/**
+ * The class provides updating {@link User} data by admin
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class UpdateUserCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(UpdateUserCommand.class);

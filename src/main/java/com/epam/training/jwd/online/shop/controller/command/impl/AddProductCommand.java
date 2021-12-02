@@ -22,7 +22,11 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
 
-
+/**
+ * The class provides for adding new {@link Product} by admin
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class AddProductCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(AddProductCommand.class);

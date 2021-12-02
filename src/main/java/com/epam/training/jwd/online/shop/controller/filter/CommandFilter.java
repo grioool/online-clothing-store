@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The class filters {@link Command} and blocked user without access
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 @WebFilter(filterName = "CommandFilter",
         initParams = {@WebInitParam(name = "command", value = "to_access_blocked")})
 public class CommandFilter implements Filter {

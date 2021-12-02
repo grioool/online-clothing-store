@@ -2,6 +2,12 @@ package com.epam.training.jwd.online.shop.controller.command;
 
 import com.epam.training.jwd.online.shop.controller.command.impl.*;
 
+/**
+ * The class represent all {@link Command}'s
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public enum CommandManager {
     TO_LOGIN(new ToLoginCommand(), "to_login"),
     TO_REGISTRATION(new ToRegistrationCommand(), "to_registration"),
@@ -56,6 +62,6 @@ public enum CommandManager {
                 return action.command;
             }
         }
-        return (Command) ToNotFoundPageCommand.INSTANCE;
+        return ToNotFoundPageCommand.INSTANCE;
     }
 }

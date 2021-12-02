@@ -50,7 +50,7 @@
 
         <div class="form-group mt-4">
             <label for="submit_button" class="text-success" style="font-size: 20px">
-                <fmt:message key="label.totalCost"/>: ${requestScope.total_cost}$
+                <fmt:message key="label.totalCost"/>: ${requestScope.order_cost}$
             </label>
             <button type="submit" id="submit_button" class="btn btn-dark w-100">
                 <fmt:message key="button.createOrder"/>
@@ -89,6 +89,6 @@
     }
 </script>
 
-<c:import url="..//page/footer.jsp"/>
+<c:import url="../page/footer.jsp"/>
 </body>
 </html>

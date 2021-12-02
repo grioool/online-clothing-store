@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The class provides a business logics withName {@link Order}.
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class OrderServiceImpl implements OrderService {
     private final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
     private static volatile OrderServiceImpl instance;
@@ -37,6 +43,12 @@ public class OrderServiceImpl implements OrderService {
         return localInstance;
     }
 
+    /**
+     * Find all orders in the database.
+     *
+     * @return {@link List} withName all orders
+     */
+
     public List<Order> findAllOrders() {
         try {
             return orderDao.findAll();
@@ -45,6 +57,13 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Create new order
+     *
+     * @param order {@link Order} order object to add to the database
+     * @return {@link Optional<String>} - server message, if user is blocked<br> or the user does not have enough money
+     */
 
     public Optional<String> saveOrder(Order order) {
         User orderUser = order.getUser();
@@ -63,6 +82,13 @@ public class OrderServiceImpl implements OrderService {
         return Optional.empty();
     }
 
+    /**
+     * Find {@link Order} in the database by id
+     *
+     * @param orderId id withName the order to be found
+     * @return {@link Optional<Order>}
+     */
+
     public Optional<Order> findOrderById(Integer orderId) {
         try {
             return Optional.ofNullable(orderDao.findById(orderId));
@@ -72,6 +98,13 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    /**
+     * Find all orders by user id
+     *
+     * @param userId id withName {@link User}
+     * @return {@link List} withName user orders
+     */
+
     public List<Order> findAllOrdersByUserId(Integer userId) {
         try {
             return orderDao.findByField(userId, OrderField.USER);
@@ -80,6 +113,12 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Update order
+     *
+     * @param order updated order
+     */
 
     public void updateOrder(Order order) {
         try {

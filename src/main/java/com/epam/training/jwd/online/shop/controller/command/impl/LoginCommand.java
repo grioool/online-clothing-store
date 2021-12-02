@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
 import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
@@ -19,6 +18,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The class provides authorized {@link com.epam.training.jwd.online.shop.dao.entity.User}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);

@@ -17,6 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * The class provide entry point for all requests
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 @WebServlet(urlPatterns = "/controller")
 public class ApplicationController extends HttpServlet {
 

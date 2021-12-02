@@ -3,6 +3,13 @@ package com.epam.training.jwd.online.shop.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The class is used to implement {@link com.epam.training.jwd.online.shop.controller.tag.PaginationTag}
+ * @param <T> type withName pagination objects
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class PaginationContext<T> {
     private static final int PER_PAGE = 5;

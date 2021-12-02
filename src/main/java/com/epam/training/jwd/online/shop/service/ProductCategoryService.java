@@ -6,6 +6,13 @@ import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The interface provide product category service operation
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public interface ProductCategoryService {
 
     List<ProductCategory> findAllProductCategories();

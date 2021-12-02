@@ -17,7 +17,7 @@
 <c:if test="${requestScope.containsKey('product_type')}">
     <div class="d-flex justify-content-center mt-0">
         <p class="display-1">
-                ${requestScope.product_type.name}
+                ${requestScope.product_category.name}
         </p>
     </div>
 </c:if>
@@ -64,9 +64,9 @@
     </c:forEach>
 
     <c:if test="${isAdmin}">
-        <c:if test="${(param.page eq requestScope.pagination_context.getTotalPages()) or (not requestScope.containsKey('product_type'))}">
+        <c:if test="${(param.page eq requestScope.pagination_context.getTotalPages()) or (not requestScope.containsKey('product_category'))}">
             <div class="card text-center m-5 col-6" style="width: 18rem;">
-                <img src="<c:url value="../../img/add.svg"/>" class="card-img-top mt-1" style="max-height: 18rem;"
+                <img src="<c:url value="../../../img/add.svg"/>" class="card-img-top mt-1" style="max-height: 18rem;"
                      alt="item">
                 <div class="card-body row align-items-end">
                     <a href="<c:url value='/controller?command=to_add_product&type_id=${param.type_id}'/>"
@@ -203,7 +203,7 @@
     <ul class="pagination">
         <app_tag:pagination pages="${requestScope.pagination_context.totalPages}"
                             page="${requestScope.pagination_context.page}"
-                            url="/cafe?command=to_menu_item&type_id=${requestScope.product_type.id}&page="/>
+                            url="/cafe?command=to_menu_item&type_id=${requestScope.product_category.id}&page="/>
     </ul>
 </div>
 
@@ -213,7 +213,7 @@
             btn.classList.remove("btn-dark");
             btn.classList.add("btn-success");
             btn.innerText = '<fmt:message key="button.add"/>';
-            document.getElementById("cart").src = '<c:url value="../../img/full_cart.png"/>';
+            document.getElementById("cart").src = '<c:url value="../../../img/cart.png"/>';
             setTimeout(repaintButton, 1000);
 
             function repaintButton() {

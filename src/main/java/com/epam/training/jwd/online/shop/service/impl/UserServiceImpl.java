@@ -17,6 +17,12 @@ import java.util.Optional;
 
 import static at.favre.lib.crypto.bcrypt.BCrypt.MIN_COST;
 
+/**
+ * The class provides a business logics withName {@link User}.
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class UserServiceImpl implements UserService {
     private final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     private static volatile UserServiceImpl instance;
@@ -44,6 +50,13 @@ public class UserServiceImpl implements UserService {
         return localInstance;
     }
 
+    /**
+     * Register new user
+     *
+     * @param user {@link User} object to be register
+     * @return {@link Optional<String>} - server message, if email or username is already exist
+     */
+
     public Optional<String> registerUser(User user) {
         final char[] rawPassword = user.getPassword().toCharArray();
         final String encryptedPassword = hasher.hashToString(MIN_COST, rawPassword);
@@ -63,6 +76,15 @@ public class UserServiceImpl implements UserService {
         return Optional.of("serverMessage.usernameAlreadyTaken");
     }
 
+    /**
+     * Login user
+     *
+     * @param username the username
+     * @param password the user password
+     * @param session  the session withName user
+     * @return Server message, if user is blocked or incorrect data entered
+     */
+
     public Optional<String> loginUser(String username, String password, Map<String, Object> session) {
         Optional<User> userOptional = findByUsername(username);
         if (userOptional.isPresent()) {
@@ -80,6 +102,12 @@ public class UserServiceImpl implements UserService {
         return Optional.of("serverMessage.incorrectUsernameOrPassword");
     }
 
+    /**
+     * Update user in database
+     *
+     * @param user updated object withName {@link User}
+     */
+
     public void updateUser(User user) {
         try {
             userDao.update(user);
@@ -88,6 +116,12 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Find all users in database.
+     *
+     * @return {@link List} withName users
+     */
 
     public List<User> findAllUsers() {
         List<User> users;

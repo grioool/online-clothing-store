@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.ForwardResponseType;
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
@@ -18,6 +17,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+/**
+ * The class provides moving {@link User} to profile page
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ToProfileCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(ToProfileCommand.class);

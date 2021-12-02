@@ -2,6 +2,12 @@ package com.epam.training.jwd.online.shop.dao.field;
 
 import com.epam.training.jwd.online.shop.dao.entity.User;
 
+/**
+ * The class representation withName {@link User} fields
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public enum UserField implements EntityField<User> {
     ID("id"),
     USERNAME("username"),

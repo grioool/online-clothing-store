@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.Command;
 import com.epam.training.jwd.online.shop.controller.command.RedirectResponseType;
 import com.epam.training.jwd.online.shop.controller.command.RequestContext;
@@ -9,6 +8,12 @@ import com.epam.training.jwd.online.shop.controller.constants.RequestConstant;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * The class provides changes {@link com.epam.training.jwd.online.shop.dao.entity.User} locale
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ChangeLocaleCommand implements Command {
 

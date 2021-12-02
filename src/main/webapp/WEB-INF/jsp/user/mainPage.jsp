@@ -21,7 +21,7 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../../img/main_bg_1.png" style="height: 650px" class="d-block w-100" alt="main_welcome">
+            <img src="../../../img/main_page_11.jpeg" style="height: 650px" class="d-block w-100" alt="main_welcome">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
                     <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../../img/main_bg_2.png" style="height: 650px" class="d-block w-100" alt="main_burger">
+            <img src="../../img/main_page_2.png" style="height: 650px" class="d-block w-100" alt="main_item">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
                     <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../../img/main_bg_3.png" style="height: 650px" class="d-block w-100" alt="main_coffee">
+            <img src="../../img/main_page_3.png" style="height: 650px" class="d-block w-100" alt="main_item">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
                     <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">

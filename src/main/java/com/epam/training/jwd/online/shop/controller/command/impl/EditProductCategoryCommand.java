@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.AdminCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
@@ -18,6 +17,11 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The class provides editing {@link com.epam.training.jwd.online.shop.dao.entity.ProductCategory} by admin
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class EditProductCategoryCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCategoryCommand.class);

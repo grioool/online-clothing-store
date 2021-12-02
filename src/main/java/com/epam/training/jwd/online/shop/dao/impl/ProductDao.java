@@ -5,9 +5,7 @@ import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPool;
 import com.epam.training.jwd.online.shop.dao.connectionpool.ConnectionPoolImpl;
 import com.epam.training.jwd.online.shop.dao.entity.*;
 import com.epam.training.jwd.online.shop.dao.exception.DaoException;
-import com.epam.training.jwd.online.shop.dao.field.ProductCategoryField;
 import com.epam.training.jwd.online.shop.dao.field.ProductField;
-import com.epam.training.jwd.online.shop.dao.field.UserField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +14,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
+/**
+ * The class provide CRUD operations for {@link Product}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class ProductDao extends AbstractDao<Product> {
 

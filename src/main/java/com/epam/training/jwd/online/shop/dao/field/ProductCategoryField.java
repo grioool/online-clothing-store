@@ -2,6 +2,12 @@ package com.epam.training.jwd.online.shop.dao.field;
 
 import com.epam.training.jwd.online.shop.dao.entity.ProductCategory;
 
+/**
+ * The class representation withName {@link ProductCategory} fields
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public enum ProductCategoryField implements EntityField<ProductCategory> {
     ID("id"),
     NAME("category_name"),

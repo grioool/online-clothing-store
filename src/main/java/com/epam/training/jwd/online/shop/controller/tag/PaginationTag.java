@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The class prints a navigation withName pagination
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class PaginationTag extends TagSupport {
     private final Logger LOGGER = LogManager.getLogger(PaginationTag.class);
     private int pages;

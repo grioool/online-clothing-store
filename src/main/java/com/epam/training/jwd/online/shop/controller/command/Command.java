@@ -1,9 +1,12 @@
 package com.epam.training.jwd.online.shop.controller.command;
 
-import com.epam.training.jwd.online.shop.dao.exception.EntityNotFoundException;
+/**
+ * The interface represent Command pattern for {@link RequestContext}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public interface Command {
-
 
     ResponseContext execute(RequestContext request);
 

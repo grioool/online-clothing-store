@@ -10,6 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The interface provide product service operation
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public interface ProductService {
 
     List<Product> findAllProducts();

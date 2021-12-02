@@ -5,6 +5,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * The class provide changes encoding withName {@link com.epam.training.jwd.online.shop.controller.command.RequestContext}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 @WebFilter(filterName = "Encoding", urlPatterns = {"/*"}, initParams = {
         @WebInitParam(name = "encoding", value = "UTF-8", description = "Encoding Param")
 })

@@ -6,6 +6,13 @@ import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The interface provide order service operation
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public interface OrderService {
 
     List<Order> findAllOrders();

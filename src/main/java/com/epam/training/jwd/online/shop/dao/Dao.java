@@ -6,6 +6,14 @@ import com.epam.training.jwd.online.shop.dao.field.EntityField;
 
 import java.util.List;
 
+/**
+ * The interface provide CRUD operation
+ *
+ * @param <T> type withName entity
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public interface Dao<T extends AbstractEntity<Integer>> {
     void save(T entity) throws DaoException;
 

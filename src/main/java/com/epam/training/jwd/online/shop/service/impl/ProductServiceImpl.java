@@ -18,6 +18,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The class provides a business logics withName {@link Product}.
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class ProductServiceImpl implements ProductService {
     private static volatile ProductServiceImpl instance;
     private final Logger logger = LogManager.getLogger(ProductServiceImpl.class);
@@ -39,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductServiceImpl(ProductDao instance) {
     }
 
+    /**
+     * Find all products in the database.
+     *
+     * @return {@link List<Product>}
+     */
+
     public List<Product> findAllProducts() {
         try {
             return productDao.findAll();
@@ -47,6 +60,13 @@ public class ProductServiceImpl implements ProductService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Find product in the database by id.
+     *
+     * @param productId id withName the product to be found
+     * @return {@link Optional<Product>}<br> Empty optional if product does not exist
+     */
 
     public Optional<Product> findProductById(Integer productId) {
         try {
@@ -61,6 +81,13 @@ public class ProductServiceImpl implements ProductService {
         return findProductByUniqueField(name, ProductField.NAME);
     }
 
+    /**
+     * Find all products by product type id.
+     *
+     * @param categoryId id withName {@link ProductCategory}
+     * @return {@link List<Product>}
+     */
+
     public List<Product> findProductsByCategoryId(Integer categoryId) {
         try {
             return productDao.findByField(categoryId, ProductField.CATEGORY);
@@ -69,6 +96,13 @@ public class ProductServiceImpl implements ProductService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Create new product
+     *
+     * @param product {@link Product} object to add to the database
+     * @return {@link Optional<String>} - server message, if product name is already exist
+     */
 
     public Optional<String> saveProduct(Product product) {
         try {
@@ -84,6 +118,13 @@ public class ProductServiceImpl implements ProductService {
         return Optional.of("serverMessage.productNameAlreadyTaken");
     }
 
+    /**
+     * Receive products from user cart.
+     *
+     * @param cart {@link Map} withName amount and id products
+     * @return {@link Map} withName amount and {@link Product}
+     */
+
     public Map<Product, Integer> receiveProducts(Map<Integer, Integer> cart) {
         Map<Product, Integer> productsInCart = new HashMap<>();
         for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
@@ -92,6 +133,13 @@ public class ProductServiceImpl implements ProductService {
         }
         return productsInCart;
     }
+
+    /**
+     * Calculate order cost
+     *
+     * @param productsInCart {@link Map} withName products and amount in user cart
+     * @return {@link BigDecimal cost}
+     */
 
     public BigDecimal calcOrderCost(Map<Product, Integer> productsInCart) {
         BigDecimal totalCost = BigDecimal.ZERO;
@@ -103,6 +151,18 @@ public class ProductServiceImpl implements ProductService {
         return totalCost;
     }
 
+
+    /**
+     * Edit product in the database.
+     *
+     * @param productId new product id
+     * @param productName new product name
+     * @param productDescription new product description
+     * @param brand new product brand
+     * @param price new product price
+     * @param article new product article
+     * @return {@link Optional<String>} - server message, if product name is already exist<br> or product not found
+     */
     public Optional<String> editProduct(Integer productId, String productName, String productDescription, Brand brand, Double price, Integer article) {
         Optional<Product> productOptional = findProductById(productId);
         if (productOptional.isPresent()) {
@@ -128,6 +188,12 @@ public class ProductServiceImpl implements ProductService {
         }
         return Optional.empty();
     }
+
+    /**
+     * Delete product in database.
+     *
+     * @param product withName the {@link Product} object to be deleted
+     */
 
     public void deleteProduct(Product product) {
         try {

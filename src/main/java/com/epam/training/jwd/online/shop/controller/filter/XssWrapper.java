@@ -6,6 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * The wrapper class withName {@link XssAttackFilter}
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class XssWrapper extends HttpServletRequestWrapper {
     private static final String AVOID_SCRIPT_FRAGMENTS_PATTERN = "<script>(.*?)</script>";
     private static final String AVOID_END_SCRIPT_PATTERN = "<script(.*?)>";

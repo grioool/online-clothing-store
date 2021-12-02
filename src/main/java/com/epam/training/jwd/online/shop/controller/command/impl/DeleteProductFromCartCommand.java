@@ -1,6 +1,5 @@
 package com.epam.training.jwd.online.shop.controller.command.impl;
 
-
 import com.epam.training.jwd.online.shop.controller.command.*;
 import com.epam.training.jwd.online.shop.controller.command.marker.UserCommand;
 import com.epam.training.jwd.online.shop.controller.constants.PageConstant;
@@ -14,6 +13,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+/**
+ * The class provides delete product from {@link com.epam.training.jwd.online.shop.dao.entity.User} cart
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class DeleteProductFromCartCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(DeleteProductFromCartCommand.class);

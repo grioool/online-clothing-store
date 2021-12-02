@@ -101,6 +101,6 @@
     </c:if>
 </script>
 
-<c:import url="..//page/footer.jsp"/>
+<c:import url="../page/footer.jsp"/>
 </body>
 </html>

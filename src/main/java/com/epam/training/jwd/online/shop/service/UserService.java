@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The interface provide user service operation
+ *
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public interface UserService {
 
     Optional<String> registerUser(User user);

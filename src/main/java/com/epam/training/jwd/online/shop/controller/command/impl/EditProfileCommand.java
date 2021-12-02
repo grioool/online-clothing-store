@@ -20,6 +20,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * The class provides editing {@link com.epam.training.jwd.online.shop.dao.entity.Product} by admin
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class EditProfileCommand implements Command, UserCommand {
     private static final Logger logger = LogManager.getLogger(EditProfileCommand.class);

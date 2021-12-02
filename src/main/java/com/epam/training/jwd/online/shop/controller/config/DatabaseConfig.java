@@ -4,6 +4,12 @@ import com.epam.training.jwd.online.shop.util.PropertyReaderUtil;
 
 import java.util.Properties;
 
+/**
+ * The class represented all data from database.properties file
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class DatabaseConfig {
     private static DatabaseConfig instance;
 

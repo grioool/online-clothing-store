@@ -21,7 +21,7 @@
 </div>
 
 <div class="row justify-content-center">
-    <c:forEach items="${requestScope.product_types}" var="item">
+    <c:forEach items="${requestScope.product_categories}" var="item">
 
         <div class="card col-6 m-5" style="width: 18rem;">
             <a class="link-dark text-decoration-none"
@@ -45,7 +45,7 @@
         <div class="card col-6 m-5" style="width: 18rem;">
             <a class="link-dark text-decoration-none" href="<c:url value="/controller?command=to_add_product_type"/>">
                 <div class="d-flex justify-content-center">
-                    <img src="<c:url value="../../img/add.svg"/>" class="card-img-top mt-1"
+                    <img src="<c:url value="../../../img/add.svg"/>" class="card-img-top mt-1"
                          alt="add" style="width: 12rem; height: 12rem">
                 </div>
                 <div class="card-body text-center">
@@ -98,7 +98,7 @@
 
                     <form name="deleteType" action="<c:url value="/controller"/>" method="post" class="needs-validation"
                           novalidate>
-                        <input type="hidden" hidden name="command" value="delete_product_type" required>
+                        <input type="hidden" hidden name="command" value="delete_product_category" required>
                         <input id="delete_id" type="text" hidden name="id" value="" required>
                         <button type="submit" class="btn btn-danger">
                             <fmt:message key="button.delete"/>
@@ -116,7 +116,7 @@
 
 <script>
     function prepareModal(id, name) {
-        document.getElementById('type_name').value = name;
+        document.getElementById('category_name').value = name;
         document.getElementById('id').value = id;
         document.getElementById('delete_id').value = id;
     }

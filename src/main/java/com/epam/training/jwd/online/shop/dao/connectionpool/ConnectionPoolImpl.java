@@ -13,6 +13,11 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+/**
+ * The class provide pool withName connections to database
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public final class ConnectionPoolImpl implements ConnectionPool {
 

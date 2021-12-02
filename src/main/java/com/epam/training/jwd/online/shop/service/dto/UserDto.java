@@ -1,9 +1,14 @@
 package com.epam.training.jwd.online.shop.service.dto;
 
-
 import com.epam.training.jwd.online.shop.dao.entity.UserRole;
 
 import java.util.Objects;
+
+/**
+ * The class representation {@link com.epam.training.jwd.online.shop.dao.entity.User} in session
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
 
 public class UserDto {
     private final int id;

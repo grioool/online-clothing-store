@@ -1,5 +1,11 @@
 package com.epam.training.jwd.online.shop.controller.constants;
 
+/**
+ * The class represent all paths to jsp files
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class PageConstant {
     public static final String MAIN_PAGE = "/WEB-INF/jsp/user/mainPage.jsp";
     public static final String LOGIN_PAGE = "/WEB-INF/jsp/user/login.jsp";

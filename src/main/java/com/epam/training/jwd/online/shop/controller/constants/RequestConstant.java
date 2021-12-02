@@ -1,5 +1,13 @@
 package com.epam.training.jwd.online.shop.controller.constants;
 
+/**
+ * The class represent all {@link com.epam.training.jwd.online.shop.controller.command.RequestContext}<br>
+ * and {@link com.epam.training.jwd.online.shop.controller.command.ResponseContext}
+ * parameters names
+ * @author Olga Grigorieva
+ * @version 1.0.0
+ */
+
 public class RequestConstant {
     public final static String FIRST_NAME = "first_name";
     public final static String LAST_NAME = "last_name";

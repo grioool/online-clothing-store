@@ -12,7 +12,7 @@
     <c:if test="${isAuthorized}">
     <c:if test="${not empty sessionScope.cart}">
     <c:if test="${sessionScope.cart.size() > 0}">
-    document.getElementById("cart").src = '<c:url value="../../img/full_cart.png"/>';
+    document.getElementById("cart").src = '<c:url value="../../../img/cart.png"/>';
     </c:if>
     </c:if>
     document.getElementById("logout").addEventListener('click', function () {
