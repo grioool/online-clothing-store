@@ -56,7 +56,7 @@ public class EditProductCommand implements Command, AdminCommand {
                 Optional<String> serverMessage = productService.editProduct(productId, productName, productDescription, brand, productPrice, productArticle);
 
                 if (!serverMessage.isPresent()) {
-                    requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU_ITEM.getCommandName());
+                    requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG_ITEM.getCommandName());
                 } else {
                     requestMap.put(RequestConstant.SERVER_MESSAGE, LocalizationMessage.localize(request.getLocale(), serverMessage.get()));
                 }

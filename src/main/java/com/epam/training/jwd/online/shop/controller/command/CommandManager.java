@@ -18,7 +18,7 @@ public enum CommandManager {
     TO_ORDERS(new ToOrdersCommand(), "to_orders"),
     TO_CATALOG(new ToCatalogCommand(), "to_catalog"),
     TO_ADD_PRODUCT_TYPE(new ToAddCategoryCommand(), "to_add_product_type"),
-    TO_MENU_ITEM(new ToCatalogItemCommand(), "to_menu_item"),
+    TO_CATALOG_ITEM(new ToCatalogItemCommand(), "to_catalog_item"),
     TO_ADD_PRODUCT(new ToAddProductCommand(), "to_add_product"),
     TO_CREATE_ORDER(new ToCreateOrderCommand(), "to_create_order"),
     TO_ACCESS_BLOCKED(new ToAccessBlockedCommand(), "to_access_blocked"),

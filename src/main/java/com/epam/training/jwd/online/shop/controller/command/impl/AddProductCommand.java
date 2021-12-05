@@ -64,7 +64,7 @@ public class AddProductCommand implements Command, AdminCommand {
 
                     if (!serverMessage.isPresent()) {
                         imgFile.write(imgFileName);
-                        requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU_ITEM.getCommandName());
+                        requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG_ITEM.getCommandName());
                     } else {
                         requestMap.put(RequestConstant.SERVER_MESSAGE,
                                 LocalizationMessage.localize(request.getLocale(), serverMessage.get()));

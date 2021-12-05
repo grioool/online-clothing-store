@@ -39,7 +39,7 @@ public class DeleteProductCommand implements Command, AdminCommand {
                 IOUtil.deleteData(product.getNameOfImage());
 
                 Map<String, Object> requestMap = new HashMap<>();
-                requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU_ITEM.getCommandName());
+                requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG_ITEM.getCommandName());
                 return new ResponseContext(new RestResponseType(), requestMap, new HashMap<>());
             }
 

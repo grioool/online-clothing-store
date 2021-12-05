@@ -43,7 +43,7 @@
 
     <c:if test="${isAdmin}">
         <div class="card col-6 m-5" style="width: 18rem;">
-            <a class="link-dark text-decoration-none" href="<c:url value="/controller?command=to_add_product_type"/>">
+            <a class="link-dark text-decoration-none" href="<c:url value="/controller?command=to_add_product_category"/>">
                 <div class="d-flex justify-content-center">
                     <img src="<c:url value="../../../img/add.svg"/>" class="card-img-top mt-1"
                          alt="add" style="width: 12rem; height: 12rem">
@@ -72,13 +72,13 @@
 
                         <p id="error_message" class="text-danger"></p>
                         <p id="server_message" class="text-danger"></p>
-                        <input type="hidden" name="command" value="edit_product_type">
+                        <input type="hidden" name="command" value="edit_product_category">
                         <input type="hidden" id="id" name="id" value="">
 
                         <div class="form-group mt-4">
-                            <label for='type_name' class="form-label"><fmt:message key="label.productTypeName"/></label>
+                            <label for='type_name' class="form-label"><fmt:message key="label.productCategoryName"/></label>
                             <input id="type_name" class="form-control" type="text" name="product_name"
-                                   placeholder="<fmt:message key="placeholder.productTypeName"/>"
+                                   placeholder="<fmt:message key="placeholder.productCategoryName"/>"
                                    pattern="^[A-Za-zа-яА-Я\s'-]{4,20}?$"
                                    required>
                             <div class="invalid-feedback">
@@ -122,7 +122,7 @@
     }
 
     function sendForm() {
-        const htmlFormElement = document.forms.namedItem('editTypeForm');
+        const htmlFormElement = document.forms.namedItem('editCategoryForm');
         if (htmlFormElement.checkValidity()) {
             sendRequest(htmlFormElement.name);
         }
