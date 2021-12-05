@@ -21,7 +21,7 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../../../img/main_page_1.jpeg" style="height: 650px" class="d-block w-100" alt="main_welcome">
+            <img src="../../../img/main_page_1.png" style="height: 650px" class="d-block w-100" alt="main_welcome">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
                     <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
