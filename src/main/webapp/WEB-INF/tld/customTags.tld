@@ -6,11 +6,11 @@
 
     <tlib-version>1.0</tlib-version>
     <short-name>app_tag</short-name>
-    <uri>/WEB-INF/tld/customTags.tld</uri>
+    <uri>/WEB-INF/taglib/pagination.tld</uri>
 
     <tag>
         <name>pagination</name>
-        <tag-class>com.epam.training.jwd.online.shop.controller.tag.GreetingTag</tag-class>
+        <tag-class>com.epam.training.jwd.online.shop.controller.tag.PaginationTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>pages</name>

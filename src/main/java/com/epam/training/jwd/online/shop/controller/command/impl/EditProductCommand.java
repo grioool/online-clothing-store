@@ -11,7 +11,6 @@ import com.epam.training.jwd.online.shop.service.validator.impl.PriceValidator;
 import com.epam.training.jwd.online.shop.service.validator.impl.ProductNameValidator;
 import com.epam.training.jwd.online.shop.dao.entity.Brand;
 import com.epam.training.jwd.online.shop.dao.exception.ServiceException;
-import com.epam.training.jwd.online.shop.service.impl.ProductCategoryServiceImpl;
 import com.epam.training.jwd.online.shop.service.impl.ProductServiceImpl;
 import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +31,6 @@ public class EditProductCommand implements Command, AdminCommand {
     private static final Logger logger = LogManager.getLogger(EditProductCommand.class);
     private static final ProductServiceImpl productService = ProductServiceImpl.getInstance();
     private static final Validator editProductPrice = new PriceValidator(new ProductNameValidator(new DescriptionValidator()));
-    private static final ProductCategoryServiceImpl productCategoryService = ProductCategoryServiceImpl.getInstance();
 
     @Override
     public ResponseContext execute(RequestContext request) {
