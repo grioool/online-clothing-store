@@ -34,7 +34,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="<c:url value='/controller?command=to_catalog'/>"><fmt:message key="link.menu"/></a>
+                       href="<c:url value='/controller?command=to_catalog'/>"><fmt:message key="link.catalog"/></a>
                 </li>
 
                 <c:if test="${isAuthorized}">

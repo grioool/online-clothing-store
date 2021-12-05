@@ -35,10 +35,10 @@ public class DeleteProductCategoryCommand implements Command, AdminCommand {
                 ProductCategory productCategory = productTypeOptional.get();
                 ProductServiceImpl.getInstance().deleteAllProductsByCategoryId(productCategory.getId());
                 productCategoryService.deleteProductCategory(productCategory);
-                IOUtil.deleteData(productCategory.getImgFilename());
+                IOUtil.deleteData(productCategory.getImgFileName());
 
                 Map<String, Object> requestMap = new HashMap<>();
-                requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU.getCommandName());
+                requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG.getCommandName());
                 return new ResponseContext(new RestResponseType(), requestMap, new HashMap<>());
             }
 

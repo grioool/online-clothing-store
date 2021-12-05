@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Find all products by product type id.
+     * Find all products by product category id.
      *
      * @param categoryId id withName {@link ProductCategory}
      * @return {@link List<Product>}
@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productDao.findByField(categoryId, ProductField.CATEGORY);
         } catch (DaoException e) {
-            logger.error("Failed to find all products with type id = " + categoryId);
+            logger.error("Failed to find all products with category id = " + categoryId);
             throw new ServiceException(e);
         }
     }
@@ -213,7 +213,7 @@ public class ProductServiceImpl implements ProductService {
                 productDao.delete(product);
             }
         } catch (DaoException e) {
-            logger.error("Failed to delete all products by type id");
+            logger.error("Failed to delete all products by category id");
             throw new ServiceException(e);
         }
     }

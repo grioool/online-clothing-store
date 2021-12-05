@@ -44,7 +44,7 @@ public class EditProductCategoryCommand implements Command, AdminCommand {
 
                 if (!serverMessage.isPresent()) {
                     editedImg.write(newFileName);
-                    requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_MENU.getCommandName());
+                    requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG.getCommandName());
                 } else {
                     requestMap.put(RequestConstant.SERVER_MESSAGE,
                             LocalizationMessage.localize(request.getLocale(), serverMessage.get()));

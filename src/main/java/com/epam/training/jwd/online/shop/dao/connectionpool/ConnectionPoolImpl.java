@@ -21,6 +21,15 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public final class ConnectionPoolImpl implements ConnectionPool {
 
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
     private final Logger logger = LogManager.getLogger(ConnectionPoolImpl.class);
     public static final ConnectionPool INSTANCE = new ConnectionPoolImpl();
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";

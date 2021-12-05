@@ -203,7 +203,7 @@
     <ul class="pagination">
         <app_tag:pagination pages="${requestScope.pagination_context.totalPages}"
                             page="${requestScope.pagination_context.page}"
-                            url="/cafe?command=to_menu_item&type_id=${requestScope.product_category.id}&page="/>
+                            url="/cafe?command=to_catalog_item&type_id=${requestScope.product_category.id}&page="/>
     </ul>
 </div>
 

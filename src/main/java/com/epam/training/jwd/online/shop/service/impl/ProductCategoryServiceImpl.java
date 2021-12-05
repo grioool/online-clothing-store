@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * Find all product types in database
+     * Find all product categories in database
      *
      * @return {@link List<ProductCategory>}
      */
@@ -52,25 +52,25 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
             return productCategoryDao.findAll();
         } catch (DaoException e) {
-            logger.error("Failed to find all product types");
+            logger.error("Failed to find all product categories");
             throw new ServiceException(e);
         }
     }
 
     /**
-     * Find product type by id in the database.
+     * Find product categories by id in the database.
      *
-     * @param id id withName the product type to be found
+     * @param id id withName the product category to be found
      * @return {@link Optional<ProductCategory>}
-     * Empty optional - if the product type if not found
+     * Empty optional - if the product category if not found
      */
 
     public Optional<ProductCategory> findProductCategoryById(Integer id) {
         return findProductCategoryByUniqueField(String.valueOf(id), ProductCategoryField.ID);
     }
 
-    public Optional<ProductCategory> findProductCategoryByName(String productTypeName) {
-        return findProductCategoryByUniqueField(productTypeName, ProductCategoryField.NAME);
+    public Optional<ProductCategory> findProductCategoryByName(String productCategoryName) {
+        return findProductCategoryByUniqueField(productCategoryName, ProductCategoryField.NAME);
     }
 
     /**
@@ -87,10 +87,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 return Optional.empty();
             }
         } catch (DaoException e) {
-            logger.error("Failed to create product type");
+            logger.error("Failed to create product category");
             throw new ServiceException(e);
         }
-        return Optional.of("serverMessage.productTypeNameAlreadyTaken");
+        return Optional.of("serverMessage.productCategoryNameAlreadyTaken");
     }
 
     /**
@@ -103,23 +103,23 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
 
     public Optional<String> editProductCategory(Integer id, String newFileName, String newProductName) {
-        Optional<ProductCategory> productTypeOptional = findProductCategoryById(id);
-        if (productTypeOptional.isPresent()) {
-            ProductCategory productCategory = productTypeOptional.get();
+        Optional<ProductCategory> productCategoryOptional = findProductCategoryById(id);
+        if (productCategoryOptional.isPresent()) {
+            ProductCategory productCategory = productCategoryOptional.get();
             if (!productCategory.getCategoryName().equals(newProductName)
                     && findProductCategoryByName(newProductName).isPresent()) {
-                return Optional.of("serverMessage.productTypeNameAlreadyTaken");
+                return Optional.of("serverMessage.productCategoryNameAlreadyTaken");
             }
-            ProductCategory editedProductType = ProductCategory.builder()
+            ProductCategory editedProductCategory = ProductCategory.builder()
                     .withId(productCategory.getId())
                     .withCategoryName(newProductName)
                     .withImgFileName(newFileName)
                     .build();
 
-            updateProductCategory(editedProductType);
-            IOUtil.deleteData(productCategory.getImgFilename());
+            updateProductCategory(editedProductCategory);
+            IOUtil.deleteData(productCategory.getImgFileName());
         } else {
-            return Optional.of("serverMessage.productTypeNotFound");
+            return Optional.of("serverMessage.productCategoryNotFound");
         }
         return Optional.empty();
     }
@@ -134,7 +134,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
             productCategoryDao.delete(productCategory);
         } catch (DaoException e) {
-            logger.error("Failed to delete product type with id = " + productCategory);
+            logger.error("Failed to delete product category with id = " + productCategory);
             throw new ServiceException(e);
         }
     }
@@ -144,8 +144,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
             productCategories = productCategoryDao.findByField(searchableField, nameOfField);
         } catch (DaoException e) {
-            logger.error("Failed on a product type search with field = " + nameOfField);
-            throw new ServiceException("Failed search product type by unique field", e);
+            logger.error("Failed on a product category search with field = " + nameOfField);
+            throw new ServiceException("Failed search product category by unique field", e);
         }
         return ((productCategories.size() > 0) ? Optional.of(productCategories.get(0)) : Optional.empty());
     }
@@ -154,7 +154,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try {
             productCategoryDao.update(productCategory);
         } catch (DaoException e) {
-            logger.error("Failed to update product type");
+            logger.error("Failed to update product category");
             throw new ServiceException(e);
         }
     }

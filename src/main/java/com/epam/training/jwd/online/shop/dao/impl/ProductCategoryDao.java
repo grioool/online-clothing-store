@@ -71,7 +71,7 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory> {
     @Override
     protected void prepareAllStatement(PreparedStatement preparedStatement, ProductCategory productCategory) throws SQLException {
         preparedStatement.setString(1, productCategory.getCategoryName());
-        preparedStatement.setString(2, productCategory.getImgFilename());
+        preparedStatement.setString(2, productCategory.getImgFileName());
     }
 
     @Override

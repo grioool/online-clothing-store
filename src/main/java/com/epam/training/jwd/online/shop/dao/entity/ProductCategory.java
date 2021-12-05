@@ -14,11 +14,11 @@ public class ProductCategory extends AbstractEntity<Integer> {
         this.imgFileName = imgFilename;
     }
 
-    public String getImgFilename() {
+    public String getImgFileName() {
         return imgFileName;
     }
 
-    public void setImgFilename(String imgFileName) {
+    public void setImgFileName(String imgFileName) {
         this.imgFileName = imgFileName;
     }
 

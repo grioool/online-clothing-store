@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title><fmt:message key="title.menu"/></title>
+    <title><fmt:message key="title.catalog"/></title>
     <c:import url="../page/header.jsp"/>
 </head>
 <body>
@@ -16,7 +16,7 @@
 
 <div class="d-flex justify-content-center mt-0">
     <p class="display-1">
-        <fmt:message key="title.menu"/>
+        <fmt:message key="title.catalog"/>
     </p>
 </div>
 
@@ -25,16 +25,16 @@
 
         <div class="card col-6 m-5" style="width: 18rem;">
             <a class="link-dark text-decoration-none"
-               href="<c:url value='/controller?command=to_menu_item&type_id=${item.id}&page=1'/>">
-                <img src="<c:url value='/data/${item.fileName}'/>" class="card-img-top" alt="${item.fileName}">
+               href="<c:url value='/controller?command=to_catalog_item&type_id=${item.id}&page=1'/>">
+                <img src="<c:url value='/data/${item.imgFileName}'/>" class="card-img-top" alt="${item.imgFileName}">
                 <div class="card-body row align-content-end">
-                    <p class="text-center">${item.name}</p>
+                    <p class="text-center">${item.categoryName}</p>
                 </div>
             </a>
 
             <c:if test="${isAdmin}">
                 <button type="button" class="btn btn-dark mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        onclick='prepareModal("${item.id}", "${item.name}")'>
+                        onclick='prepareModal("${item.id}", "${item.categoryName}")'>
                     <fmt:message key="button.edit"/>
                 </button>
             </c:if>
