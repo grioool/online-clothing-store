@@ -34,7 +34,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
     public static final ConnectionPool INSTANCE = new ConnectionPoolImpl();
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
-    private static final String PASS = "890opklnm";
+    private static final String PASS = "11111111";
     private static final int INITIAL_POOL_SIZE = 32;
 
 
