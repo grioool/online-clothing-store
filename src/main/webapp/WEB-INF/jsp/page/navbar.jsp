@@ -12,7 +12,7 @@
     <c:set var="isAdmin" value="${sessionScope.user.role.name eq 'ADMIN'}" scope="request"/>
 </c:if>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid ">
 
         <a class="navbar-brand" href="<c:url value="/controller?command=to_main"/>">

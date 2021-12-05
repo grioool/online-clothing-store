@@ -26,7 +26,7 @@
                 <div class="d-flex justify-content-center row">
                     <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
                         <h2><fmt:message key="title.main"/></h2>
-                        <p style="font-size: 16px;"><fmt:message key="label.main.cafe"/></p>
+                        <p style="font-size: 16px;"><fmt:message key="label.main.store"/></p>
                     </div>
                 </div>
             </div>
