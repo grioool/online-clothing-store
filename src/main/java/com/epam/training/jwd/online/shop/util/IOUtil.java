@@ -14,8 +14,7 @@ import java.io.File;
 
 public class IOUtil {
     private static final Logger LOGGER = LogManager.getLogger(IOUtil.class);
-   private static final String DATA_DIR = "";
-    //TODO
+    private static final String DATA_DIR = "\\Users\\olga\\online-clothing-store\\target\\online-store-1.0-SNAPSHOT\\data";
     private IOUtil() {
     }
 
