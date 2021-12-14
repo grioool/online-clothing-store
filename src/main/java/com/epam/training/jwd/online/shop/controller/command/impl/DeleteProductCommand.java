@@ -36,7 +36,7 @@ public class DeleteProductCommand implements Command, AdminCommand {
                 orderService.deleteProductFromOrders(productId);
                 Product product = productOptional.get();
                 productService.deleteProduct(product);
-                IOUtil.deleteData(product.getNameOfImage());
+                IOUtil.deleteData(product.getImgFileName());
 
                 Map<String, Object> requestMap = new HashMap<>();
                 requestMap.put(RequestConstant.REDIRECT_COMMAND, CommandManager.TO_CATALOG_ITEM.getCommandName());

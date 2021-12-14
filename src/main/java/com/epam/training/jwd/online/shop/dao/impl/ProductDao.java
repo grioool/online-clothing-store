@@ -88,7 +88,7 @@ public class ProductDao extends AbstractDao<Product> {
         preparedStatement.setDouble(2, product.getPrice());
         preparedStatement.setInt(3, product.getBrand().getId());
         preparedStatement.setInt(4, product.getCategory().getId());
-        preparedStatement.setString(5, product.getNameOfImage() );
+        preparedStatement.setString(5, product.getImgFileName() );
         preparedStatement.setString(6, product.getProductDescription());
         preparedStatement.setInt(7, product.getArticle());
     }

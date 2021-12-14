@@ -22,7 +22,7 @@
     </div>
 </c:if>
 
-<c:if test="${not requestScope.containsKey('product_type')}">
+<c:if test="${not requestScope.containsKey('product_category')}">
     <div class="d-flex justify-content-center mt-0">
         <p class="display-1">
             <fmt:message key="title.emptyProducts"/>
@@ -36,8 +36,8 @@
             <img src="<c:url value='data/${item.imgFileName}'/>" class="card-img-top"
                  style="max-height: 18rem;" alt="Item">
             <div class="card-body row align-items-end">
-                <h5 class="card-title">${item.name}</h5>
-                <p class="card-text">${item.description}</p>
+                <h5 class="card-title">${item.productName}</h5>
+                <p class="card-text">${item.productDescription}</p>
                 <p class="card-text">${item.price}$</p>
 
                 <c:if test="${isAuthorized}">
@@ -203,7 +203,7 @@
     <ul class="pagination">
         <app_tag:pagination pages="${requestScope.pagination_context.totalPages}"
                             page="${requestScope.pagination_context.page}"
-                            url="/cafe?command=to_catalog_item&type_id=${requestScope.product_category.id}&page="/>
+                            url="/controller?command=to_catalog_item&type_id=${requestScope.product_category.id}&page="/>
     </ul>
 </div>
 

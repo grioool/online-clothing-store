@@ -178,7 +178,7 @@ public class ProductServiceImpl implements ProductService {
                     .withProductCategory(product.getCategory())
                     .withProductName(productName)
                     .withPrice(price)
-                    .withNameOfImage(product.getNameOfImage())
+                    .withNameOfImage(product.getImgFileName())
                     .withProductDescription(productDescription)
                     .withArticle(article)
                     .build();

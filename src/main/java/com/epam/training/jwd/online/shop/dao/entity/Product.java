@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Product extends AbstractEntity<Integer> {
 
     private String productName;
-    private String nameOfImage;
+    private String imgFileName;
     private String productDescription;
     private Brand brand;
     private ProductCategory category;
@@ -14,10 +14,10 @@ public class Product extends AbstractEntity<Integer> {
 
     public Product() {}
 
-    public Product(Integer id, String productName, String nameOfImage, String productDescription, Brand brand, ProductCategory category, Double price, Integer article) {
+    public Product(Integer id, String productName, String imgFileName, String productDescription, Brand brand, ProductCategory category, Double price, Integer article) {
         super(id);
         this.productName = productName;
-        this.nameOfImage = nameOfImage;
+        this.imgFileName = imgFileName;
         this.productDescription =productDescription;
         this.brand = brand;
         this.category = category;
@@ -33,12 +33,12 @@ public class Product extends AbstractEntity<Integer> {
         this.productName = productName;
     }
 
-    public String getNameOfImage() {
-        return nameOfImage;
+    public String getImgFileName() {
+        return imgFileName;
     }
 
-    public void setNameOfImage(String nameOfImage) {
-        this.nameOfImage = nameOfImage;
+    public void setImgFileName(String imgFileName) {
+        this.imgFileName = imgFileName;
     }
 
     public String getProductDescription() {
@@ -86,19 +86,19 @@ public class Product extends AbstractEntity<Integer> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productName, product.productName) && Objects.equals(nameOfImage, product.nameOfImage) && Objects.equals(productDescription, product.productDescription) && Objects.equals(brand, product.brand) && Objects.equals(category, product.category) && Objects.equals(price, product.price) && Objects.equals(article, product.article);
+        return Objects.equals(productName, product.productName) && Objects.equals(imgFileName, product.imgFileName) && Objects.equals(productDescription, product.productDescription) && Objects.equals(brand, product.brand) && Objects.equals(category, product.category) && Objects.equals(price, product.price) && Objects.equals(article, product.article);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productName, nameOfImage, productDescription, brand, category, price, article);
+        return Objects.hash(productName, imgFileName, productDescription, brand, category, price, article);
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "productName='" + productName + '\'' +
-                ", nameOfImage='" + nameOfImage + '\'' +
+                ", nameOfImage='" + imgFileName + '\'' +
                 ", productDescription='" + productDescription + '\'' +
                 ", brand=" + brand +
                 ", category=" + category +

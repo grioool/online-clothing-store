@@ -66,7 +66,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
 
     public Optional<ProductCategory> findProductCategoryById(Integer id) {
-        return findProductCategoryByUniqueField(String.valueOf(id), ProductCategoryField.ID);
+        return Optional.ofNullable(productCategoryDao.findById(id));
     }
 
     public Optional<ProductCategory> findProductCategoryByName(String productCategoryName) {
