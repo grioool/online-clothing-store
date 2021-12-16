@@ -23,10 +23,10 @@ import java.util.Optional;
  * @version 1.0.0
  */
 
-@WebServlet(urlPatterns = "/controller")
+@WebServlet(urlPatterns = {"/controller", "*.do"})
+@MultipartConfig(location = "/Users/olga/online-clothing-store/target/online-store-1.0-SNAPSHOT/data",
+        maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 2)
 public class ApplicationController extends HttpServlet {
-
-    public static final String COMMAND_PARAM_NAME = "command";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
