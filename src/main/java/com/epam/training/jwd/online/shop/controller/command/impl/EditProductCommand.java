@@ -16,6 +16,7 @@ import com.epam.training.jwd.online.shop.util.LocalizationMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -44,7 +45,7 @@ public class EditProductCommand implements Command, AdminCommand {
             Integer productId = Integer.parseInt(id);
             String price = request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE);
             String productName = request.getRequestParameters().get(RequestConstant.PRODUCT_NAME);
-            Double productPrice = Double.parseDouble(price);
+            BigDecimal productPrice =  new BigDecimal(price);
             String productDescription = request.getRequestParameters().get(RequestConstant.PRODUCT_DESCRIPTION);
             Brand brand = Brand.valueOf(request.getRequestParameters().get(RequestConstant.PRODUCT_BRAND));
             String article = request.getRequestParameters().get(RequestConstant.PRODUCT_ARTICLE);

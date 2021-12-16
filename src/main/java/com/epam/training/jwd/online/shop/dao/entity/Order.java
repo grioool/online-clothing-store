@@ -97,7 +97,7 @@ public class Order extends AbstractEntity<Integer> {
 
     public BigDecimal getOrderCost() {
         return products.entrySet().stream()
-                .map((entry) -> BigDecimal.valueOf(entry.getKey().getPrice() * entry.getValue()))
+                .map((entry) -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

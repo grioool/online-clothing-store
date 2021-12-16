@@ -26,7 +26,7 @@
         <div class="card col-6 m-5" style="width: 18rem;">
             <a class="link-dark text-decoration-none"
                href="<c:url value='/controller?command=to_catalog_item&type_id=${item.id}&page=1'/>">
-                <img src="<c:url value='/data/${item.imgFileName}'/>" class="card-img-top" alt="${item.imgFileName}">
+                <img src="<c:url value='data/${item.imgFileName}'/>" class="card-img-top" alt="${item.imgFileName}">
                 <div class="card-body row align-content-end">
                     <p class="text-center">${item.categoryName}</p>
                 </div>

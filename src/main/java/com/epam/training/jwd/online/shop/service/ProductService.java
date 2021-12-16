@@ -33,7 +33,7 @@ public interface ProductService {
 
     BigDecimal calcOrderCost(Map<Product, Integer> productsInCart);
 
-    Optional<String> editProduct(Integer id, String productName, String productDescription, Brand brand, Double price, Integer article);
+    Optional<String> editProduct(Integer id, String productName, String productDescription, Brand brand, BigDecimal price, Integer article);
 
     void deleteProduct(Product product);
 

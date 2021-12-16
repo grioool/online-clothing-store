@@ -8,6 +8,7 @@ import com.epam.training.jwd.online.shop.dao.field.UserField;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,9 +28,9 @@ class ProductDaoTest {
         productCategoryDao = ProductCategoryDao.INSTANCE;
         productBuilder = Product.builder()
                 .withProductName("black_shoes")
-                .withPrice(33.3)
+                .withPrice(BigDecimal.valueOf(33.3))
                 .withBrand(Brand.GRIOOOL)
-                .withProductCategory(productCategoryDao.findByName("Shoes"))
+                .withProductCategory(productCategoryDao.findByName("Skirt"))
                 .withNameOfImage("blackShoesFile")
                 .withProductDescription("Black shoes")
                 .withArticle(299299);

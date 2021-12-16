@@ -144,9 +144,9 @@ public class ProductServiceImpl implements ProductService {
     public BigDecimal calcOrderCost(Map<Product, Integer> productsInCart) {
         BigDecimal totalCost = BigDecimal.ZERO;
         for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
-            Double productPrice = entry.getKey().getPrice();
+            BigDecimal productPrice = entry.getKey().getPrice();
             BigDecimal amountOfProducts = BigDecimal.valueOf(entry.getValue());
-            totalCost = totalCost.add(amountOfProducts.multiply(new BigDecimal(productPrice)));
+            totalCost = totalCost.add(amountOfProducts.multiply(productPrice));
         }
         return totalCost;
     }
@@ -163,7 +163,7 @@ public class ProductServiceImpl implements ProductService {
      * @param article new product article
      * @return {@link Optional<String>} - server message, if product name is already exist<br> or product not found
      */
-    public Optional<String> editProduct(Integer productId, String productName, String productDescription, Brand brand, Double price, Integer article) {
+    public Optional<String> editProduct(Integer productId, String productName, String productDescription, Brand brand, BigDecimal price, Integer article) {
         Optional<Product> productOptional = findProductById(productId);
         if (productOptional.isPresent()) {
             Product product = productOptional.get();

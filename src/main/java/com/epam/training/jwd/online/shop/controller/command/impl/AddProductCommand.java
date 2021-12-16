@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -47,7 +48,7 @@ public class AddProductCommand implements Command, AdminCommand {
                 int productTypeId = Integer.parseInt(request.getRequestParameters().get(RequestConstant.TYPE_ID));
                 String productName = request.getRequestParameters().get(RequestConstant.PRODUCT_NAME);
                 String productDescription = request.getRequestParameters().get(RequestConstant.PRODUCT_DESCRIPTION);
-                Double productPrice = new Double(request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE));
+                BigDecimal productPrice = new BigDecimal(request.getRequestParameters().get(RequestConstant.PRODUCT_PRICE));
                 Optional<ProductCategory> productTypeOptional = productCategoryService.findProductCategoryById(productTypeId);
 
                 if (productTypeOptional.isPresent()) {

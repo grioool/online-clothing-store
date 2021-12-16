@@ -1,5 +1,6 @@
 package com.epam.training.jwd.online.shop.dao.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Product extends AbstractEntity<Integer> {
@@ -9,12 +10,12 @@ public class Product extends AbstractEntity<Integer> {
     private String productDescription;
     private Brand brand;
     private ProductCategory category;
-    private Double price;
+    private BigDecimal price;
     private Integer article;
 
     public Product() {}
 
-    public Product(Integer id, String productName, String imgFileName, String productDescription, Brand brand, ProductCategory category, Double price, Integer article) {
+    public Product(Integer id, String productName, String imgFileName, String productDescription, Brand brand, ProductCategory category,BigDecimal price, Integer article) {
         super(id);
         this.productName = productName;
         this.imgFileName = imgFileName;
@@ -65,11 +66,11 @@ public class Product extends AbstractEntity<Integer> {
         this.category = category;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -118,7 +119,7 @@ public class Product extends AbstractEntity<Integer> {
         private String productDescription;
         private Brand brand;
         private ProductCategory category;
-        private Double price;
+        private BigDecimal price;
         private Integer article;
 
         public Builder withId(Integer id) {
@@ -151,7 +152,7 @@ public class Product extends AbstractEntity<Integer> {
             return this;
         }
 
-        public Builder withPrice(Double price) {
+        public Builder withPrice(BigDecimal price) {
             this.price = price;
             return this;
         }

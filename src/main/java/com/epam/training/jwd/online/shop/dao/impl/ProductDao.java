@@ -85,7 +85,7 @@ public class ProductDao extends AbstractDao<Product> {
     @Override
     protected void prepareAllStatement(PreparedStatement preparedStatement, Product product) throws SQLException {
         preparedStatement.setString(1, product.getProductName());
-        preparedStatement.setDouble(2, product.getPrice());
+        preparedStatement.setBigDecimal(2, product.getPrice());
         preparedStatement.setInt(3, product.getBrand().getId());
         preparedStatement.setInt(4, product.getCategory().getId());
         preparedStatement.setString(5, product.getImgFileName() );
@@ -98,7 +98,7 @@ public class ProductDao extends AbstractDao<Product> {
         Product product = Product.builder()
                 .withId(resultSet.getInt(ProductField.ID.getField()))
                 .withProductName(resultSet.getString(ProductField.NAME.getField()))
-                .withPrice(resultSet.getDouble(ProductField.PRICE.getField()))
+                .withPrice(resultSet.getBigDecimal(ProductField.PRICE.getField()))
                 .withBrand(Brand.getById(resultSet.getInt(ProductField.BRAND.getField())))
                 .withProductCategory(ProductCategoryDao.INSTANCE.findById(resultSet.getInt(ProductField.CATEGORY.getField())))
                 .withNameOfImage(resultSet.getString(ProductField.NAME_OF_IMAGE.getField()))

@@ -24,9 +24,9 @@
             <img src="../../../img/main_page_1.png" style="height: 650px" class="d-block w-100" alt="main_welcome">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
-                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
+                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px; color: black">
                         <h2><fmt:message key="title.main"/></h2>
-                        <p style="font-size: 16px;"><fmt:message key="label.main.store"/></p>
+                        <p style="font-size: 16px; color: black"><fmt:message key="label.main.store"/></p>
                     </div>
                 </div>
             </div>
@@ -35,9 +35,9 @@
             <img src="../../../img/main_page_2.png" style="height: 650px" class="d-block w-100" alt="main_item">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
-                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
+                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px; color: black">
                         <h2><fmt:message key="title.main.products"/></h2>
-                        <p style="font-size: 16px;"><fmt:message key="label.main.products"/></p>
+                        <p style="font-size: 16px; color: black"><fmt:message key="label.main.products"/></p>
                     </div>
                 </div>
             </div>
@@ -46,9 +46,9 @@
             <img src="../../../img/main_page_3.png" style="height: 650px" class="d-block w-100" alt="main_item">
             <div class="carousel-caption d-none d-md-block">
                 <div class="d-flex justify-content-center row">
-                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px;">
+                    <div class="col-4" style="backdrop-filter: blur(2px); border-radius: 15px; color: black">
                         <h2><fmt:message key="title.main.delivery"/></h2>
-                        <p style="font-size: 16px;"><fmt:message key="label.main.delivery"/></p>
+                        <p style="font-size: 16px; color: black"><fmt:message key="label.main.delivery"/></p>
                     </div>
                 </div>
             </div>
