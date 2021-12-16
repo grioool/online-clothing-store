@@ -1,8 +1,7 @@
 package com.epam.training.jwd.online.shop.domain.security;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.apache.commons.codec.digest.DigestUtils;
 
-import static at.favre.lib.crypto.bcrypt.BCrypt.MIN_COST;
 
 /**
  * The class provide encrypt user password
@@ -12,7 +11,11 @@ import static at.favre.lib.crypto.bcrypt.BCrypt.MIN_COST;
 
 public class PasswordEncoder {
 
+
+    private PasswordEncoder() {
+    }
+
     public static String encryptPassword(String password) {
-        return BCrypt.withDefaults().hashToString(MIN_COST, password.toCharArray());
+        return DigestUtils.md5Hex(password);
     }
 }

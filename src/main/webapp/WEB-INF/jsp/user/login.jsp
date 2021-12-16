@@ -15,7 +15,8 @@
 <c:import url="../page/navbar.jsp"/>
 
 <div class="container-fluid d-flex justify-content-center mt-5">
-    <form action="<c:url value="/controller"/>" method="post" class="needs-validation w-25 border-dark" novalidate>
+    <form name="login" action="<c:url value="/controller"/>" method="post" class="needs-validation w-25 border-dark"
+          novalidate>
         <h2 class="d-flex justify-content-center"><fmt:message key="title.auth"/></h2>
 
         <p id="server_message" class="text-danger">${server_message}</p>
@@ -79,3 +80,4 @@
 <c:import url="../page/footer.jsp"/>
 </body>
 </html>
+

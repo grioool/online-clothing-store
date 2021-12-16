@@ -27,14 +27,10 @@ public class UserServiceImpl implements UserService {
     private final Logger logger = LogManager.getLogger(UserServiceImpl.class);
     private static volatile UserServiceImpl instance;
     private final UserDao userDao;
-    private final BCrypt.Hasher hasher;
-    private final BCrypt.Verifyer verifyer;
 
 
     private UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-        this.hasher = BCrypt.withDefaults();
-        this.verifyer = BCrypt.verifyer();
     }
 
     public static UserServiceImpl getInstance() {
@@ -58,12 +54,9 @@ public class UserServiceImpl implements UserService {
      */
 
     public Optional<String> registerUser(User user) {
-        final char[] rawPassword = user.getPassword().toCharArray();
-        final String encryptedPassword = hasher.hashToString(MIN_COST, rawPassword);
         if (!findByUsername(user.getUsername()).isPresent()) {
             if (!findByEmail(user.getEmail()).isPresent()) {
                 try {
-                    user.setPassword(encryptedPassword);
                     userDao.save(user);
                     return Optional.empty();
                 } catch (DaoException e) {
@@ -89,8 +82,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = findByUsername(username);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-
-            if (verifyer.verify(password.toCharArray(), user.getPassword().toCharArray()).verified) {
+            if (password.equals(user.getPassword())) {
                 if (user.isBlocked()) {
                     return Optional.of("serverMessage.blockedAccount");
                 }
